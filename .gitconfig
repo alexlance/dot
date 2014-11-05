@@ -1,0 +1,7 @@
+[user]
+	name = Alex Lance
+	email = alla@cyber.com.au
+[core]
+	editor = vim
+[color]
+	ui = true

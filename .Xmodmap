@@ -1,0 +1,15 @@
+keycode 111 = Up NoSymbol KP_8 KP_8
+keycode 113 = Left NoSymbol KP_4 KP_4
+keycode 114 = Right NoSymbol KP_6 KP_6
+keycode 116 = Down NoSymbol KP_2 KP_2
+keycode  36 = Return NoSymbol KP_5 KP_5
+keycode 115 = End NoSymbol KP_Multiply KP_Multiply
+keycode 119 = Delete NoSymbol KP_Divide KP_Divide
+keycode 117 = Next NoSymbol KP_Subtract KP_Subtract
+keycode 110 = Home NoSymbol KP_Insert KP_Insert
+keycode 112 = Prior NoSymbol KP_Delete KP_Delete
+keycode 133 = Mode_switch NoSymbol Mode_switch
+keycode 118 = Insert NoSymbol Pointer_EnableKeys Pointer_EnableKeys
+remove lock = Caps_Lock
+keysym Caps_Lock = Escape
+
