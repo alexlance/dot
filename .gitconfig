@@ -1,7 +1,26 @@
 [user]
-	name = Alex Lance
-	email = alla@cyber.com.au
-[core]
-	editor = vim
+  name = Alex Lance
+  email = xxxxxxxxxxxxxxxxxx
+
 [color]
-	ui = true
+  ui = auto
+
+[core]
+  excludesfile = ~/.gitignore
+
+[alias]
+  record = ! sh -c '(git add -p -- $@ && git commit) || git reset' --
+  st = status -sb
+  co = checkout
+  b = branch -v
+  l = log --oneline -10 --format=format:'%ad %Cgreen%h %Cred%an %Creset%s' --date=short
+  ll = log --oneline --format=format:'%ad %Cgreen%h %Cred%an %Creset%s' --date=short
+  revert = checkout -p
+  alla = log --oneline --format=format:'%ad %Cgreen%h %Cred%an %Creset%s' --author=alla --date=short
+  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit
+[filter "noeol"]
+  clean = noeol_filter
+  smudge = cat
+
+[interactive]
+  singlekey = true
