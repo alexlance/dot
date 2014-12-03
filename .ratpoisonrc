@@ -49,3 +49,17 @@ exec xterm -e "tmux -u"
 # ctrl-space i
 # Then switch the two windows:
 # ctrl-space :number 1 0
+
+# focus policy
+#http://lists.gnu.org/archive/html/ratpoison-devel/2014-09/msg00021.html
+# apt-get source ratpoison
+# apt-get build-dep ratpoison
+# cd ratpoison
+# wget http://lists.gnu.org/archive/html/ratpoison-devel/2014-09/txtstRdKbW0CE.txt
+# patch -p1 < txtst...txt
+# mv txtthingo /awaysomewhere
+# dpkg-buildpackage -us -uc
+# it should have created a ../rp.deb
+focus_policy ffm
+
+
