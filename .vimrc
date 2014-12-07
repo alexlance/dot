@@ -201,4 +201,30 @@ augroup resCur
 augroup END
 
 
+" Highlight trailing whitespace etc
+"highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
+"autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+"match ExtraWhitespace /\s\+\%#\@<!$/
+"
+"set listchars=tab:>-,trail:-
+"
+" Go (golang) whitespace: real tabs.
+autocmd FileType go setlocal sts=2 ts=2 sw=2 tabstop=2 noexpandtab nospell
+autocmd FileType php setlocal sts=2 ts=2 sw=2 tabstop=2 expandtab nospell
+autocmd FileType python setlocal sts=2 ts=2 sw=2 tabstop=2 expandtab nospell
+
+" turn on backup
+set backup
+" " Set where to store backups
+set backupdir=/home/alla/.vim/tmp/
+" " Set where to store swap files
+set dir=/home/alla/.vim/tmp/
+set list
+set listchars=tab:..,trail:.
+
+" list char
+hi SpecialKey ctermfg=236
+hi Comment ctermfg=238
+hi TabLineSel ctermfg=White 
+hi TabLine ctermfg=245
 
