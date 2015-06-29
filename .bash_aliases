@@ -5,6 +5,7 @@ alias ..='cd ..'
 alias ifconfig='/sbin/ifconfig'
 alias s='du -sh * .??* | sort -h | less -S -E -F -R -X'
 alias t='tmux attach -d'
+alias startx='ssh-agent xinit /home/alla/.xinitrc -- /etc/X11/xinit/xserverrc :0'
 
 export PATH=$PATH:/usr/local/go/bin
 export TERM=xterm-256color
