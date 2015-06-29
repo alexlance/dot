@@ -3,12 +3,11 @@ filetype plugin on
 syntax on
 au BufRead,BufNewFile *.screenplay    set filetype=screenplay
 
-autocmd BufWritePost /var/www/alloc/javascript/*.js :silent !(cd /var/www/alloc && make cache > /dev/null)
-autocmd BufWritePost /var/www/alloc/css/src/* :silent !(cd /var/www/alloc && make css > /dev/null)
+autocmd BufWritePost */alloc/javascript/*.js :silent !(make cache > /dev/null)
+autocmd BufWritePost */alloc/css/src/* :silent       !(make css > /dev/null)
 
-autocmd BufWritePost /var/www/alouy.raw-sugar.net/htdocs/javascript/*.js :silent !(cd /var/www/alouy.raw-sugar.net/htdocs/ && make cache > /dev/null)
-autocmd BufWritePost /var/www/alouy.raw-sugar.net/htdocs/css/src/* :silent !(cd /var/www/alouy.raw-sugar.net/htdocs && make css > /dev/null)
 
+set encoding=utf-8
 set expandtab
 set softtabstop=2
 set tabstop=2
@@ -22,16 +21,18 @@ map Y y$
 map Q :q<CR>
 map W :w<CR>
 
+map <Space> i
+
 let makeprg = "php -l %"
 
-function MyTabOrComplete()
-    let col = col('.')-1
-    if !col || getline('.')[col-1] !~ '\k'
-         return "\<tab>"
-    else
-         return "\<C-N>"
-    endif
-endfunction
+"function MyTabOrComplete()
+"    let col = col('.')-1
+"    if !col || getline('.')[col-1] !~ '\k'
+"         return "\<tab>"
+"    else
+"         return "\<C-N>"
+"    endif
+"endfunction
 
 function! SuperTab()
     if (strpart(getline('.'),col('.')-2,1)=~'^\W\?$')
@@ -68,25 +69,6 @@ au FileType php set omnifunc=phpcomplete#CompletePHP
 
 
 
-"map <F5> <Esc>ba_POST["<Esc>ea"]<Esc>
-"map <F6> <Esc>ba_GET["<Esc>ea"]<Esc>
-
-" map <F7> <Esc>:%s/<TABLE/<table/g<cr><Esc>:%s/<TR/<tr/g<cr>:%s/<TD/<td/g<cr>:%s/<TH/<th/g<cr>:%s/<CENTER/<center/g<cr>:%s/<FORM/<form/g<cr>:%s/<TEXTAREA/<textarea/g<cr>:%s/<INPUT/<input/g<cr>:%s/<SELECT/<select/g<cr>:noh<cr>
-" map <F8> <Esc>:%s/<\/TABLE/<\/table/g<cr>:%s/<\/TR/<\/tr/g<cr>:%s/<\/TD/<\/td/g<cr>:%s/<\/TH/<\/th/g<cr>:%s/<\/CENTER/<\/center/g<cr>:%s/<\/FORM/<\/form/g<cr>:%s/<\/TEXTAREA/<\/textarea/g<cr>:%s/<\/INPUT/<\/input/g<cr>:%s/<\/SELECT/<\/select/g<cr>:noh<cr>
-
-" Map F7 to making html lower case..
-" using : instead of forward slashes to delimit search and replace. 
-"map <F7> <Esc>:%s:<\(/\=\)\(B\\|U\\|H1\\|H2\\|H3\\|H4\\|H5\\|H6\\|HR\\|BR\\|FONT\\|TABLE\\|TR\\|TD\\|TH\\|CENTER\\|FORM\\|TEXTAREA\\|INPUT\\|SELECT\\|OPTION\\|SCRIPT\):<\L\1\2:g<CR>:noh<CR>
-
-"imap ( ()<Esc>i
-"imap [ []<Esc>i
-"imap < <><Esc>i
-"imap { {}<Esc>i
-"imap BR echo "<br>"
-"ab BR+ echo "<br>"
-"ab br+ echo "<br>"
-"ab $q+ $q = sprintf("");<CR>$db->query($q);<CR>while ($db->next_record()) {<CR><CR>}
-
 set bs=2    " allow backspacing over everything in insert mode (for Vanilla!)
 set sw=2
 "set bg=light
@@ -105,9 +87,18 @@ set tabpagemax=500
 " Nuke spaces till end of line
 map -- :%s/\s*$//g<CR>:noh<CR>
  
+map q gq<Down>
+
 
 "autocmd FileWritePre *.php call ValidatePHP()
-"set scrolloff=10
+set scrolloff=0
+set confirm
+
+set nojoinspaces      " Use only one space after '.' when joining lines, instead of two
+set shiftround        " round to 'shiftwidth' for "<<" and ">>" 
+"runtime macros/matchit.vim
+
+
 
 " Disable the loading of the paren thing
 let loaded_matchparen = 1
@@ -141,16 +132,6 @@ nmap gb i!gb!<esc>gqip?!gb!<cr>df!
 set ff=unix
 
 
-" screenplay actions
-"map <F1> i                <esc>:set tw=70<CR>i
-" screenplay character names
-"map <F2> i                                     
-" screenplay dialog
-"map <F3> i                          <esc>:set tw=60<CR>i
-"map <F1> <esc>:set tw=68<CR>
-"map <F2> <esc>:set tw=60<CR>
-
-
 if has("spell")
   setlocal spell spelllang=en_au spellfile=/home/alla/.vim/spellfile.add
 endif
@@ -178,6 +159,10 @@ imap [1;2C <Esc>:tabn<CR>
 imap <S-Left> <Esc>:tabp<CR>
 imap <S-Right> <Esc>:tabn<CR>
 
+map <S-Up> <C-y>
+map <S-Down> <C-e>
+map <F4> <Esc>:g/^./,/\n$/j<CR>
+
 set showtabline=2
 
 highlight TabLine       ctermfg=green ctermbg=None cterm=None
@@ -201,6 +186,9 @@ augroup resCur
 augroup END
 
 
+autocmd InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
+autocmd InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
+
 " Highlight trailing whitespace etc
 "highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
 "autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
@@ -213,14 +201,21 @@ autocmd FileType go setlocal sts=2 ts=2 sw=2 tabstop=2 noexpandtab nospell
 autocmd FileType php setlocal sts=2 ts=2 sw=2 tabstop=2 expandtab nospell
 autocmd FileType python setlocal sts=2 ts=2 sw=2 tabstop=2 expandtab nospell
 
+" performance on large files
+"set synmaxcol=100
+set copyindent
+
+map <C-d> :r !date "+\%F \%T  \%a"<cr>A  
+imap <C-d> <esc>:r !date "+\%F \%T  \%a"<cr>A  
+
 " turn on backup
+
 set backup
 " " Set where to store backups
 set backupdir=/home/alla/.vim/tmp/
 " " Set where to store swap files
 set dir=/home/alla/.vim/tmp/
-set list
-set listchars=tab:..,trail:.
+set viminfo+=n/home/alla/.vim/viminfo
 
 " list char
 hi SpecialKey ctermfg=236
