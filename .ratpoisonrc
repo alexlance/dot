@@ -18,8 +18,19 @@ bind down focusdown
 bind x exec xtrlock
 definekey top M-1 prev
 definekey top M-2 next
+definekey top M-3 nextscreen
+
 definekey top M-Tab focusprev
 definekey top M-F2 exec
+
+#definekey top M-4 swap 1
+definekey top M-4 exec ratpoison -c "swap 1" -c "nextscreen"
+
+bind - hsplit
+bind | vsplit
+
+#definekey top C-1 prev
+#definekey top C-2 next
 definekey top C-Tab focusprev
 
 #exec rpws init 4 -a
@@ -29,6 +40,8 @@ definekey top C-Tab focusprev
 definekey top C-M-BackSpace quit
 definekey top Pause exec sh /home/alla/bin/mute.sh
 definekey top F7 exec sh /home/alla/bin/mute.sh
+
+# laptop shortcuts
 definekey top F2 exec sh /home/alla/bin/mute.sh
 definekey top F4 exec sh /home/alla/bin/volume.sh up
 definekey top F3 exec sh /home/alla/bin/volume.sh down
@@ -37,12 +50,6 @@ set border 0
 set barpadding 0 0 0 0
 
 #exec rpws init 2 -k
-#exec xmodmap -quiet ~/.Xmodmap
-#exec xterm -e ssh-agent bash
-#exec opera
-#exec mythfrontend
-#exec opera
-exec xterm -e "tmux -u"
 
 # To switch windows 
 # First see what numbers your windows are:

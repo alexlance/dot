@@ -12,6 +12,9 @@ XTerm*cursorColor: rgb:00/99/00
 XTerm*UXTerm: True
 XTerm*highlightSelection: True
 XTerm*charClass: 33:48,37-38:48,44-47:48,64:48,58:48,126:48,61:48,63:48,43:48,35:48
+!XTerm*charClass: 0-32:1,33-126:2,127-160:3,161-255:2
+XTerm*boldMode: False
 *customization: -color
 XTerm*termName: xterm-color
+!XTerm*termName: xterm-256color
 
