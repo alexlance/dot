@@ -38,13 +38,13 @@ definekey top C-Tab focusprev
 #definekey top C-M-Right rpwsn
 
 definekey top C-M-BackSpace quit
-definekey top Pause exec sh /home/alla/bin/mute.sh
-definekey top F7 exec sh /home/alla/bin/mute.sh
+definekey top Pause exec bash /home/alla/bin/mute.sh
+definekey top F7 exec bash /home/alla/bin/mute.sh
 
 # laptop shortcuts
-definekey top F2 exec sh /home/alla/bin/mute.sh
-definekey top F4 exec sh /home/alla/bin/volume.sh up
-definekey top F3 exec sh /home/alla/bin/volume.sh down
+definekey top F2 exec bash /home/alla/bin/mute.sh
+definekey top F4 exec bash /home/alla/bin/volume.sh up
+definekey top F3 exec bash /home/alla/bin/volume.sh down
 
 set border 0
 set barpadding 0 0 0 0
