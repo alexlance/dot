@@ -2,4 +2,3 @@ set mark-directories On
 set mark-symlinked-directories On
 set show-all-if-unmodified on
 set show-all-if-ambiguous on
-set completion-ignore-case on
