@@ -40,6 +40,9 @@ definekey top C-Tab focusprev
 definekey top C-M-BackSpace quit
 definekey top Pause exec bash /home/alla/bin/mute.sh
 definekey top F7 exec bash /home/alla/bin/mute.sh
+definekey top XF86AudioMedia exec bash /home/alla/bin/mute.sh
+definekey top XF86HomePage exec bash /home/alla/bin/heater.sh
+definekey top Scroll_Lock exec bash /home/alla/bin/heater.sh
 
 # laptop shortcuts
 definekey top F2 exec bash /home/alla/bin/mute.sh
@@ -61,12 +64,14 @@ set barpadding 0 0 0 0
 #http://lists.gnu.org/archive/html/ratpoison-devel/2014-09/msg00021.html
 # apt-get source ratpoison
 # apt-get build-dep ratpoison
+# also may need to: apt-get install texinfo  (to obtain makeinfo)
 # cd ratpoison
 # wget http://lists.gnu.org/archive/html/ratpoison-devel/2014-09/txtstRdKbW0CE.txt
 # patch -p1 < txtst...txt
 # mv txtthingo /awaysomewhere
-# dpkg-buildpackage -us -uc
-# it should have created a ../rp.deb
+# dpkg-source --commit
+# dpkg-buildpackage -us -uc (I seemed to need to run this twice?)
+# it should have created a ../ratpoison_1.4.8-1_amd64.deb
 focus_policy ffm
 
 

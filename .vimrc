@@ -87,7 +87,7 @@ set tabpagemax=500
 " Nuke spaces till end of line
 map -- :%s/\s*$//g<CR>:noh<CR>
  
-map q gq<Down>
+"map q gq<Down>
 
 
 "autocmd FileWritePre *.php call ValidatePHP()
