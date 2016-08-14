@@ -56,6 +56,9 @@ nnoremap K <nop>
 nnoremap ; :
 map <C-P> gqip
 
+map <C-J> <Esc>:%!python -m json.tool<CR>
+
+
 " omni autocompletions per-language
 au FileType python set omnifunc=pythoncomplete#Complete
 au FileType javascript set omnifunc=javascriptcomplete#CompleteJS
@@ -222,4 +225,9 @@ hi SpecialKey ctermfg=236
 hi Comment ctermfg=238
 hi TabLineSel ctermfg=White 
 hi TabLine ctermfg=245
+
+
+au BufRead,BufNewFile *.tf setlocal filetype=terraform
+au BufRead,BufNewFile *.tfvars setlocal filetype=terraform
+au BufRead,BufNewFile *.tfstate setlocal filetype=javascript
 
