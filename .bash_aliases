@@ -29,7 +29,7 @@ function f_ {
     files=$(find . -type f -${insensitive}name "*${@}*" -not -path "*.swp" | tee /dev/fd/5)
     count=$(echo "${files}" | wc -l)
     [ -n "${files}" ] && read -p "vim (${count} files)? " yn
-    [ "${yn}" = "y" ] && vim -p ${files}
+    [ "${yn}" = "y" ] && vim -p $(echo ${files} | sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g")
   fi
 }
 function g_ {
@@ -37,11 +37,12 @@ function g_ {
   if [ -n "${@}" ]; then
     exec 5>&1 # so we can echo out results as they are found, and also capture the output to a variable
     [[ "${@}" =~ [[:upper:]].* ]] || insensitive="i"
-    files=$(grep -rs${insensitive} "${@}" * | tee /dev/fd/5)
+    files=$(grep -rs${insensitive} --color=always "${@}" * | tee /dev/fd/5)
     files=$(echo "${files}" | sed 's/:.*$//' | uniq)
     count=$(echo "${files}" | wc -l)
     [ -n "${files}" ] && read -p "vim (${count} files)? " yn
-    [ "${yn}" = "y" ] && vim "+/${@}" -p ${files}
+
+    [ "${yn}" = "y" ] && vim "+/${@}" -p $(echo ${files} | sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g")
   fi
 }
 
@@ -53,3 +54,11 @@ function chrom() {
   fi
 }
 
+function parse_git_branch() {
+  b=$(git branch --color=never 2>/dev/null | grep -E '^\* ' | sed -e 's/^* //')
+  s=$(git status --porcelain 2>/dev/null)
+  [ "${s}" ] && extra='~'
+  [ -z "${s}" ] && extra='✓'
+  [ "$b" ] && echo "(${b}${extra}) "
+}
+export PS1="$PS1\$(parse_git_branch)"
