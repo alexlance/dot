@@ -226,8 +226,6 @@ hi Comment ctermfg=238
 hi TabLineSel ctermfg=White 
 hi TabLine ctermfg=245
 
-
 au BufRead,BufNewFile *.tf setlocal filetype=terraform
 au BufRead,BufNewFile *.tfvars setlocal filetype=terraform
 au BufRead,BufNewFile *.tfstate setlocal filetype=javascript
-

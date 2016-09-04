@@ -10,6 +10,7 @@ alias sx='ssh-agent bash -c "ssh-add /home/alla/.ssh/id_rsa4096_2015 && startx"'
 alias show_apt_installs='( zcat $( ls -tr /var/log/apt/history.log*.gz ) ; cat /var/log/apt/history.log ) | grep -E "^(Start-Date:|Commandline:)" | grep -v aptdaemon | grep -E "^Commandline:"'
 alias mountPrivate='mount -t ecryptfs -o "noauto,ecryptfs_unlink_sigs,ecryptfs_fnek_sig=80db41800b399816,ecryptfs_key_bytes=16,ecryptfs_cipher=aes,ecryptfs_sig=80db41800b399816,ecryptfs_passthrough=n,key=passphrase" ./Private ./Private'
 alias dexec="docker exec -it \$(docker ps -q | head -1) bash"
+alias hh='ssh mint /home/alla/bin/heater.sh'
 
 export PATH=$PATH:/usr/local/go/bin
 export TERM=xterm-256color
