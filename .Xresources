@@ -18,3 +18,4 @@ XTerm*boldMode: False
 XTerm*termName: xterm-color
 !XTerm*termName: xterm-256color
 
+Xcursor.theme: big-cursor

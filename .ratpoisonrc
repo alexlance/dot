@@ -21,7 +21,7 @@ definekey top M-2 next
 definekey top M-3 nextscreen
 
 definekey top M-Tab focusprev
-definekey top M-F2 exec
+#definekey top M-F2 exec
 
 #definekey top M-4 swap 1
 definekey top M-4 exec ratpoison -c "swap 1" -c "nextscreen"
