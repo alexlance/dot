@@ -62,7 +62,15 @@ function parse_git_branch() {
   [ -z "${s}" ] && extra='✓'
   [ "$b" ] && echo "(${b}${extra}) "
 }
-export PS1="$PS1\$(parse_git_branch)"
+function authed() {
+  local numkeys=$(ssh-add -l | wc -l)
+  if [ "$numkeys" ]; then
+    for i in $(seq $numkeys); do
+      echo -n ☻
+    done
+  fi
+}
+export PS1="\$(authed)$PS1\$(parse_git_branch)"
 
 export GOPATH=$HOME/Encrypted/go
 export PATH=$PATH:$GOPATH/bin
