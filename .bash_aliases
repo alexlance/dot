@@ -63,7 +63,7 @@ function parse_git_branch() {
   [ "$b" ] && echo "(${b}${extra}) "
 }
 function authed() {
-  local numkeys=$(ssh-add -l | wc -l)
+  local numkeys=$(ssh-add -l 2>/dev/null | wc -l)
   if [ "$numkeys" ]; then
     for i in $(seq $numkeys); do
       echo -n ☻
