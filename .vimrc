@@ -21,6 +21,9 @@ map Y y$
 map Q :q<CR>
 map W :w<CR>
 
+map <C-d> :q!<CR>
+imap <C-d> <Esc>:q!<CR>
+
 map <Space> i
 
 let makeprg = "php -l %"
@@ -208,8 +211,8 @@ autocmd FileType python setlocal sts=2 ts=2 sw=2 tabstop=2 expandtab nospell
 "set synmaxcol=100
 set copyindent
 
-map <C-d> :r !date "+\%F \%T  \%a"<cr>A  
-imap <C-d> <esc>:r !date "+\%F \%T  \%a"<cr>A  
+"map <C-d> :r !date "+\%F \%T  \%a"<cr>A  
+"imap <C-d> <esc>:r !date "+\%F \%T  \%a"<cr>A  
 
 " turn on backup
 
