@@ -7,6 +7,9 @@ autocmd BufWritePost */alloc/javascript/*.js :silent !(make cache > /dev/null)
 autocmd BufWritePost */alloc/css/src/* :silent       !(make css > /dev/null)
 
 
+execute pathogen#infect()
+
+
 set encoding=utf-8
 set expandtab
 set softtabstop=2
@@ -138,9 +141,9 @@ nmap gb i!gb!<esc>gqip?!gb!<cr>df!
 set ff=unix
 
 
-if has("spell")
-  setlocal spell spelllang=en_au spellfile=/home/alla/.vim/spellfile.add
-endif
+"if has("spell")
+"  setlocal spell spelllang=en_au spellfile=/home/alla/.vim/spellfile.add
+"endif
 
 
 if (v:version >= 700)
@@ -228,7 +231,17 @@ hi SpecialKey ctermfg=236
 hi Comment ctermfg=238
 hi TabLineSel ctermfg=White 
 hi TabLine ctermfg=245
+hi LineNr ctermfg=236
+set number
+
+map <F5> :GitGutterToggle<cr>:set invnumber<cr>
+
 
 au BufRead,BufNewFile *.tf setlocal filetype=terraform
 au BufRead,BufNewFile *.tfvars setlocal filetype=terraform
 au BufRead,BufNewFile *.tfstate setlocal filetype=javascript
+
+
+
+
+

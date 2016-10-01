@@ -13,11 +13,11 @@
   st = status -sb
   co = checkout
   b = branch -v
-  l = log --oneline -10 --format=format:'%ad %Cgreen%h %Cred%an %Creset%s' --date=short
+  l = log --oneline -20 --format=format:'%ad %Cgreen%h %Cred%an %Creset%s' --date=short
   ll = log --oneline --format=format:'%ad %Cgreen%h %Cred%an %Creset%s' --date=short
-  revert = checkout -p
   alla = log --oneline --format=format:'%ad %Cgreen%h %Cred%an %Creset%s' --author=alla --date=short
   lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit
+  pullr = pull --rebase
 [filter "noeol"]
   clean = noeol_filter
   smudge = cat
@@ -25,4 +25,4 @@
 [interactive]
   singlekey = true
 [push]
-	default = simple
+	default = current

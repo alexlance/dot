@@ -63,3 +63,6 @@ function parse_git_branch() {
   [ "$b" ] && echo "(${b}${extra}) "
 }
 export PS1="$PS1\$(parse_git_branch)"
+
+export GOPATH=$HOME/Encrypted/go
+export PATH=$PATH:$GOPATH/bin
