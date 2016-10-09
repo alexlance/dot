@@ -55,35 +55,41 @@ function chrom() {
   fi
 }
 
-function parse_git_branch() {
+function git_branch() {
   local start
-  b=$(git branch --color=never 2>/dev/null | grep -E '^\* ' | sed -e 's/^* //')
-  s=$(git status --porcelain 2>/dev/null)
+  local b=$(git branch --color=never 2>/dev/null | grep -E '^\* ' | sed -e 's/^* //')
+  local s=$(git status --porcelain 2>/dev/null)
   if [ "${s}" ]; then
-    start='\033[0;33m'
     extra='~'
   else
-    start='\033[0;32m'
     extra='✓'
   fi
   if [ "$b" ]; then
-    echo -en $start
     echo -n "(${b}${extra})"
-    echo -en '\033[0m '
   fi
 }
 function authed() {
   local numkeys=$(ssh-add -l 2>/dev/null | wc -l)
   if [ "$numkeys" ]; then
-    echo -en '\033[1;33m'
     for i in $(seq $numkeys); do
-      echo -n ☻
+      s="${s}☻"
     done
-    echo -en '\033[0m'
+    echo -e $s
   fi
 }
 
-export PS1="\$(authed)\u@\h \033[1;34m\w\033[0m \$(parse_git_branch)"
+c_black=$(   tput setaf 0)
+c_red=$(     tput setaf 1)
+c_green=$(   tput setaf 2)
+c_yellow=$(  tput setaf 3)
+c_blue=$(    tput setaf 4)
+c_magenta=$( tput setaf 5)
+c_cyan=$(    tput setaf 6)
+c_white=$(   tput setaf 7)
+c_bold=$(    tput bold)
+c=$(         tput sgr0) # reset
+
+PS1='\[${c_yellow}\]$(authed)\[${c}\]\u@\h \[${c_bold}${c_blue}\]\w\[${c}\] \[${c_green}\]$(git_branch)\[${c}\] '
 
 export GOPATH=$HOME/Encrypted/go
 export PATH=$PATH:$GOPATH/bin

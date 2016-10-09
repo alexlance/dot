@@ -26,3 +26,5 @@
   singlekey = true
 [push]
 	default = current
+[pull]
+	default = current
