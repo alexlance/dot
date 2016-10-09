@@ -65,7 +65,7 @@ function git_branch() {
     extra='✓'
   fi
   if [ "$b" ]; then
-    echo -n "(${b}${extra})"
+    echo " (${b}${extra})"
   fi
 }
 function authed() {
@@ -74,22 +74,23 @@ function authed() {
     for i in $(seq $numkeys); do
       s="${s}☻"
     done
-    echo -e $s
+    echo $s
   fi
 }
 
-c_black=$(   tput setaf 0)
-c_red=$(     tput setaf 1)
-c_green=$(   tput setaf 2)
-c_yellow=$(  tput setaf 3)
-c_blue=$(    tput setaf 4)
-c_magenta=$( tput setaf 5)
-c_cyan=$(    tput setaf 6)
-c_white=$(   tput setaf 7)
-c_bold=$(    tput bold)
-c=$(         tput sgr0) # reset
+# to avoid terminal wrapping issues colour escape sequences must be surrounded by \[ and \]
+c_black="\[$(   tput setaf 0 )\]"
+c_red="\[$(     tput setaf 1 )\]"
+c_green="\[$(   tput setaf 2 )\]"
+c_yellow="\[$(  tput setaf 3 )\]"
+c_blue="\[$(    tput setaf 4 )\]"
+c_magenta="\[$( tput setaf 5 )\]"
+c_cyan="\[$(    tput setaf 6 )\]"
+c_white="\[$(   tput setaf 7 )\]"
+c_bold="\[$(    tput bold    )\]"
+c="\[$(         tput sgr0    )\]" # reset
 
-PS1='\[${c_bold}${c_yellow}\]$(authed)\[${c}\]\u@\h \[${c_bold}${c_blue}\]\w\[${c}\] \[${c_green}\]$(git_branch)\[${c}\] '
+PS1="${c_bold}${c_yellow}\$(authed)${c}\u@\h ${c_bold}${c_blue}\w${c}${c_green}\$(git_branch)${c} "
 
 export GOPATH=$HOME/Encrypted/go
 export PATH=$PATH:$GOPATH/bin
