@@ -89,7 +89,7 @@ c_white=$(   tput setaf 7)
 c_bold=$(    tput bold)
 c=$(         tput sgr0) # reset
 
-PS1='\[${c_yellow}\]$(authed)\[${c}\]\u@\h \[${c_bold}${c_blue}\]\w\[${c}\] \[${c_green}\]$(git_branch)\[${c}\] '
+PS1='\[${c_bold}${c_yellow}\]$(authed)\[${c}\]\u@\h \[${c_bold}${c_blue}\]\w\[${c}\] \[${c_green}\]$(git_branch)\[${c}\] '
 
 export GOPATH=$HOME/Encrypted/go
 export PATH=$PATH:$GOPATH/bin
