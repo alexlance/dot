@@ -69,7 +69,7 @@ function git_branch() {
   fi
 }
 function authed() {
-  local numkeys=$(ssh-add -l 2>/dev/null | wc -l)
+  local numkeys=$(ssh-add -l 2>/dev/null | grep -v 'The agent has no identities' | wc -l)
   if [ "$numkeys" ]; then
     for i in $(seq $numkeys); do
       s="${s}☻"
