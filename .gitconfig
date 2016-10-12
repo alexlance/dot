@@ -18,6 +18,7 @@
   alla = log --oneline --format=format:'%ad %Cgreen%h %Cred%an %Creset%s' --author=alla --date=short
   lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit
   pullr = pull --rebase
+  pp = ! sh -c '(git pull --rebase && git push)'
 [filter "noeol"]
   clean = noeol_filter
   smudge = cat
