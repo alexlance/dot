@@ -2,3 +2,12 @@ set mark-directories On
 set mark-symlinked-directories On
 set show-all-if-unmodified on
 set show-all-if-ambiguous on
+
+# alt-backspace delete word
+"ÿ": backward-kill-word
+
+# alt-arrow keys
+"\e[1;3A": "cd ..\n"
+"\e[1;3D": backward-word
+"\e[1;3C": forward-word
+"\e[1;3B": undo
