@@ -1,7 +1,11 @@
-set mark-directories On
-set mark-symlinked-directories On
+
+set mark-symlinked-directories on
 set show-all-if-unmodified on
 set show-all-if-ambiguous on
+
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+set completion-ignore-case off
 
 # alt-backspace delete word
 "ÿ": backward-kill-word
@@ -10,4 +14,4 @@ set show-all-if-ambiguous on
 "\e[1;3A": "cd ..\n"
 "\e[1;3D": backward-word
 "\e[1;3C": forward-word
-"\e[1;3B": undo
+"\e[1;3B": "cd -\n"
