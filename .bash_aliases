@@ -11,16 +11,17 @@ alias show_apt_installs='( zcat $( ls -tr /var/log/apt/history.log*.gz ) ; cat /
 alias mountPrivate='mount -t ecryptfs -o "noauto,ecryptfs_unlink_sigs,ecryptfs_fnek_sig=80db41800b399816,ecryptfs_key_bytes=16,ecryptfs_cipher=aes,ecryptfs_sig=80db41800b399816,ecryptfs_passthrough=n,key=passphrase" ./Private ./Private'
 alias dexec="docker exec -it \$(docker ps -q | head -1) bash"
 alias hh='ssh mint /home/alla/bin/heater.sh'
+alias grep='grep --exclude=*.pyc --exclude=*.swp --color=auto --exclude-dir=.terraform --exclude-dir=.git'
 
 export PATH=$PATH:/usr/local/go/bin
 export TERM=xterm-256color
 export EDITOR=vim
-export GREP_OPTIONS="--exclude=*.pyc --exclude=*.swp --color=auto"
 export GOPATH=$HOME/go
 export GPG_TTY=`tty`   # for ~/.vim/plugin/gnupg.vim
 export LANG=en_AU.utf8 # fix utf-8 in mutt's email reader
 export PS4='+${BASH_SOURCE}:${LINENO}:${FUNCNAME[0]}: '
 export PS4="$(tput setaf 1 2>/dev/null)$PS4$(tput sgr0 2>/dev/null)"
+export AWS_REGIONS="ap-southeast-2 us-west-2"
 
 function f_ {
   local yn files insensitive count
@@ -76,6 +77,10 @@ function authed() {
     done
     echo $s
   fi
+}
+
+function replace() {
+  grep -rsl "${1}" * | tee /dev/stderr | xargs sed -i "s^${1}^${2}^g"
 }
 
 # to avoid terminal wrapping issues colour escape sequences must be surrounded by \[ and \]

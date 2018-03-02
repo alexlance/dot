@@ -9,6 +9,7 @@ keycode 117 = Next NoSymbol KP_Subtract KP_Subtract
 keycode 110 = Home NoSymbol KP_Insert KP_Insert
 keycode 112 = Prior NoSymbol KP_Delete KP_Delete
 keycode 133 = Mode_switch NoSymbol Mode_switch
+keycode 134 = Mode_switch NoSymbol Mode_switch
 keycode 118 = Insert NoSymbol Pointer_EnableKeys Pointer_EnableKeys
 remove lock = Caps_Lock
 keysym Caps_Lock = Escape
