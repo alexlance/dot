@@ -1,0 +1,52 @@
+
+escape C-space
+startup_message off
+
+#escape Pause
+#hsplit
+#focusright
+#exec urxvt -e screen -RD
+#exec firefox
+#bind M-1 focusleft
+#definekey top M-1 focusleft
+#definekey top M-2 focusright
+
+bind left focusleft
+bind right focusright
+bind up focusup
+bind down focusdown
+bind x exec xtrlock
+definekey top M-1 prev
+definekey top M-2 next
+definekey top M-3 nextscreen
+definekey top M-Tab focusprev
+definekey top M-F2 exec
+definekey top M-4 exec ratpoison -c "swap 1" -c "nextscreen"
+definekey top C-Tab focusprev
+
+#exec rpws init 4 -a
+#definekey top C-M-Left rpwsp
+#definekey top C-M-Right rpwsn
+
+definekey top C-M-BackSpace quit
+definekey top Pause exec bash /home/alla/bin/mute.sh
+definekey top F10 exec sh /home/alla/bin/mute_leaf.sh
+definekey top F11 exec sh /home/alla/bin/volume.sh down
+definekey top F12 exec sh /home/alla/bin/volume.sh up
+
+definekey top F5 exec sudo /home/alla/bin/leds_keyboard.sh down
+definekey top F6 exec sudo /home/alla/bin/leds_keyboard.sh up
+definekey top F1 exec sudo /home/alla/bin/brightness.sh down
+definekey top F2 exec sudo /home/alla/bin/brightness.sh up
+
+set border 0
+set barpadding 0 0 0 0
+
+#exec rpws init 2 -k
+exec xterm -e "tmux -u"
+
+# To switch windows 
+# First see what numbers your windows are:
+# ctrl-space i
+# Then switch the two windows:
+# ctrl-space :number 1 0

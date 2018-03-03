@@ -1,0 +1,17 @@
+! xrdb -merge .Xresources
+! alla xterm settings
+! -fg white -bg black -fa "DejaVu Sans Mono" -fs 11 -si
+xterm*background:	Black
+xterm*foreground:	Grey
+xterm*faceName:	DejaVu Sans Mono
+xterm*faceSize: 12
+xterm*scrollTtyOutput: False
+xterm*cursorBlink: False
+XTerm*saveLines: 10000
+XTerm*cursorColor: rgb:00/99/00
+XTerm*UXTerm: True
+XTerm*highlightSelection: True
+XTerm*charClass: 33:48,37-38:48,44-47:48,64:48,58:48,126:48,61:48,63:48,43:48,35:48
+*customization: -color
+XTerm*termName: xterm-color
+
