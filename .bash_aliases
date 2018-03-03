@@ -1,4 +1,5 @@
 alias l='ls -lah --color=auto'
+alias ls='ls --color=auto'
 alias lm='ls -lah --color=always | more'
 alias m='more'
 alias ..='cd ..'
