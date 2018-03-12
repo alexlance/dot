@@ -19,6 +19,7 @@
   lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit
   pullr = pull --rebase
   pp = ! sh -c '(git pull --rebase && git push)'
+  pps = ! sh -c '(git stash && git pull --rebase && git push && git stash pop)'
   pr = ! sh -c '(git push origin $(git symbolic-ref --short -q HEAD) && hub pull-request)'
 [filter "noeol"]
   clean = noeol_filter
@@ -30,3 +31,7 @@
 	default = current
 [pull]
 	default = current
+  rebase = true
+
+[branch]
+    autosetuprebase = always

@@ -136,6 +136,7 @@ map <S-F8> <Esc>:cp<CR>
 " size of preview window, eg git status
 set previewheight=25
 map <C-g> <Esc>:Gstatus<CR>
+"map <C-G> :Dispatch! git stash ; git pull --rebase ; git push ; git stash pop<CR>
 
 map <F5> :GitGutterToggle<cr>:set invnumber<cr>
 
