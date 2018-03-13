@@ -162,3 +162,8 @@ vmap < <gv
 au BufRead,BufNewFile *.tf setlocal filetype=terraform
 au BufRead,BufNewFile *.tfvars setlocal filetype=terraform
 au BufRead,BufNewFile *.tfstate setlocal filetype=javascript
+
+map <S-Up> <C-y>
+map <S-Down> <C-e>
+inoremap <S-Up> <C-x><C-y>
+inoremap <S-Down> <C-x><C-e>
