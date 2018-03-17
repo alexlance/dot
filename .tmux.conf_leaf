@@ -36,4 +36,4 @@ set -g xterm-keys on
 
 setw -g mode-keys vi
 
-set -g status-right '#[fg=blue,bold]#(/home/alla/bin/battery.sh)%l:%M%P %Y-%m-%d %a#[default]'
+set -g status-right '#[fg=red]#(/home/alla/bin/swap.sh) #[fg=blue,bold]#(/home/alla/bin/battery.sh) %l:%M%P %Y-%m-%d %a#[default]'
