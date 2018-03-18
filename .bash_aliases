@@ -81,7 +81,7 @@ function authed() {
 }
 
 function replace() {
-  grep -rsl "${1}" * | tee /dev/stderr | xargs sed -i "s^${1}^${2}^g"
+  grep -rsl "${1}" * | tee /dev/stderr | xargs sed -i "s|${1}|${2}|g";
 }
 
 # to avoid terminal wrapping issues colour escape sequences must be surrounded by \[ and \]
