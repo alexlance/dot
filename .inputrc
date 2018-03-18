@@ -11,7 +11,11 @@ set completion-ignore-case off
 "ÿ": backward-kill-word
 
 # alt-arrow keys
-"\e[1;3A": "cd ..\n"
+"\e[1;3A": "cd ..\nl\n"
 "\e[1;3D": backward-word
 "\e[1;3C": forward-word
 "\e[1;3B": "cd -\n"
+
+# arrow keys
+"\e[OA": history-search-backward
+"\e[OB": history-search-forward
