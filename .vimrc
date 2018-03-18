@@ -1,6 +1,7 @@
 set nocompatible        " must be the first line
 execute pathogen#infect()
 
+set viminfo+=n~/.vim/viminfo
 set encoding=utf-8
 set hlsearch
 set nohidden " close tab closes buffer
