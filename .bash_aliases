@@ -13,6 +13,9 @@ alias mountPrivate='mount -t ecryptfs -o "noauto,ecryptfs_unlink_sigs,ecryptfs_f
 alias dexec="docker exec -it \$(docker ps -q | head -1) bash"
 alias hh='ssh mint /home/alla/bin/heater.sh'
 alias grep='grep --exclude=*.pyc --exclude=*.swp --color=auto --exclude-dir=.terraform --exclude-dir=.git'
+alias sssh='ssh -q -o BatchMode=yes -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -t'
+alias chromium='command chromium --audio-buffer-size=2048'
+alias xterm='xrdb -merge ~/.Xresources ; xterm -class UXTerm -title uxterm -u8'
 
 export PATH=$PATH:/usr/local/go/bin
 export TERM=xterm-256color
@@ -98,5 +101,26 @@ c="\[$(         tput sgr0    )\]" # reset
 
 PS1="${c_bold}${c_yellow}\$(authed)${c}\u@\h ${c_bold}${c_blue}\w${c}${c_green}\$(git_branch)${c} "
 
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
+function replace() {
+  grep -rsl "${1}" * | tee /dev/stderr | xargs sed -i "s|${1}|${2}|g"
+}
+
+function aws() {
+  case ${1} in
+    "cache") shift; grep $1 /tmp/.awscache | awk '{print $2}';;
+    *) command aws "${@}";;
+  esac
+}
+
+function ter() {
+  case ${1} in
+    "plan")  shift; terraform init && terraform plan -parallelism=100 ${@};;
+    "apply") shift; terraform init && terraform apply -auto-approve -parallelism=100 ${@};;
+    "dns")   grep fqdn terraform.tfstate | awk '{print $2}' | tr -d '"' | tr -d ',';;
+    "ls")    terraform show | grep -E '^[a-zA-Z]' | tr -d ':';;
+    "sg")    for i in $(grep -E '"sg-(.*)' terraform.tfstate | awk '{print $2}' | sort -u | tr -d '"' | tr -d ','); do echo $i $(aws cache $i); done;;
+    *)       command terraform "${@}";;
+  esac
+}
+
+[ -f ~/.bash_aliases_local ] && .  ~/.bash_aliases_local
