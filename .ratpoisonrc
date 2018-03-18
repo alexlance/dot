@@ -21,12 +21,15 @@ definekey top M-2 next
 definekey top M-3 nextscreen
 definekey top M-Tab focusprev
 definekey top M-F2 exec
+
+#definekey top M-4 swap 1
 definekey top M-4 exec ratpoison -c "swap 1" -c "nextscreen"
 definekey top C-Tab focusprev
 
-#exec rpws init 4 -a
-#definekey top C-M-Left rpwsp
-#definekey top C-M-Right rpwsn
+exec rpws init 3 -a
+definekey top C-M-Left rpwsp
+definekey top C-M-Right rpwsn
+#exec rpws restore rpws-current-layout # try this!
 
 definekey top C-M-BackSpace quit
 definekey top Pause exec bash /home/alla/bin/mute.sh
@@ -34,6 +37,9 @@ definekey top F7 exec bash /home/alla/bin/mute.sh
 definekey top XF86AudioMedia exec bash /home/alla/bin/mute.sh
 definekey top XF86HomePage exec bash /home/alla/bin/heater.sh
 definekey top Scroll_Lock exec bash /home/alla/bin/heater.sh
+
+definekey top Super_R exec bash /home/alla/bin/scrot.sh
+definekey top Menu exec bash /home/alla/bin/screenshot.sh
 
 # laptop shortcuts
 definekey top F2 exec bash /home/alla/bin/mute.sh
@@ -45,7 +51,7 @@ set barpadding 0 0 0 0
 
 #exec rpws init 2 -k
 
-# To switch windows 
+# To switch windows
 # First see what numbers your windows are:
 # ctrl-space i
 # Then switch the two windows:
