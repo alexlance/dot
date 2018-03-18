@@ -1,7 +1,7 @@
 ! xrdb -merge .Xresources
 ! alla xterm settings
 ! -fg white -bg black -fa "DejaVu Sans Mono" -fs 11 -si
-xterm*background:	Black
+xterm*background:	rgb:18/18/18
 xterm*foreground:	Grey
 xterm*faceName:	DejaVu Sans Mono
 xterm*faceSize: 12
@@ -23,4 +23,4 @@ Xcursor.theme: big-cursor
 
 XTerm*cutNewLine: false
 XTerm*cutToBeginningOfLine: false
-XTerm*charClass: 33:48,35:48,37:48,42:48,45-47:48,64:48,95:48,126:48
+XTerm*charClass: 33:48,37:48,42:48,45-47:48,58:48,63-64:48,126:48
