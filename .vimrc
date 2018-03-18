@@ -5,7 +5,6 @@ set viminfo+=n~/.vim/viminfo
 set encoding=utf-8
 set hlsearch
 set nohidden " close tab closes buffer
-set autochdir
 set expandtab
 set softtabstop=2
 set tabstop=2
@@ -31,6 +30,7 @@ set ttyfast
 set wildmode=longest,list,full
 set wildmenu
 set confirm
+set noautochdir
 set shiftround    " round to 'shiftwidth' for "<<" and ">>"
 filetype plugin on
 
