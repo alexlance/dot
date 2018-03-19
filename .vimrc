@@ -270,10 +270,8 @@ set copyindent
 
 " turn on backup
 set backup
-" " Set where to store backups
 set backupdir=/home/alla/.vim/tmp/
 set dir=/home/alla/.vim/tmp/
-set viminfo+=n/home/alla/.vim/viminfo
 
 " list char
 highlight SpecialKey ctermfg=236
