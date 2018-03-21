@@ -15,7 +15,6 @@ alias hh='ssh mint /home/alla/bin/heater.sh'
 alias grep='grep --exclude=*.pyc --exclude=*.swp --color=auto --exclude-dir=.terraform --exclude-dir=.git'
 alias sssh='ssh -q -o BatchMode=yes -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -t'
 alias chromium='command chromium --audio-buffer-size=2048'
-alias xterm='xrdb -merge ~/.Xresources ; xterm -class UXTerm -title uxterm -u8'
 
 export PATH=$PATH:/usr/local/go/bin
 export TERM=xterm-256color

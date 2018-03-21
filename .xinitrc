@@ -1,4 +1,3 @@
-[[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
 xmodmap /home/alla/.Xmodmap
 
 if [ -x /usr/bin/synclient ]; then
