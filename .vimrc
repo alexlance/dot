@@ -232,8 +232,6 @@ map <Space> i
 
 cmap w!! w !sudo tee % >/dev/null
 
-silent! colorscheme alexdefault
-
 " yank into the system buffer
 "map Y :'<,'>w !xclip -i -sel c<CR><CR>
 nnoremap Y y$
