@@ -11,16 +11,12 @@ XTerm*saveLines: 10000
 XTerm*cursorColor: rgb:00/99/00
 XTerm*UXTerm: True
 XTerm*highlightSelection: True
-!XTerm*charClass: 0-32:1,33-126:2,127-160:3,161-255:2
-!XTerm*charClass: 33:48,37-38:48,44-47:48,64:48,58:48,126:48,61:48,63:48,43:48,35:48
 XTerm*boldMode: False
 *customization: -color
 XTerm*termName: xterm-color
-*internalBorder: 10
-!XTerm*termName: xterm-256color
-
-Xcursor.theme: big-cursor
-
+XTerm*charClass: 33:48,35:48,37:48,42:48,45-47:48,58:48,63-64:48,95:48,126:48
 XTerm*cutNewLine: false
 XTerm*cutToBeginningOfLine: false
-XTerm*charClass: 33:48,37:48,42:48,45-47:48,58:48,63-64:48,126:48
+*internalBorder: 10
+Xcursor.theme: big-cursor
+

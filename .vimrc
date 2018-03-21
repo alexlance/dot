@@ -11,11 +11,6 @@ autocmd BufWritePost */alloc/javascript/*.js :silent !(make cache > /dev/null)
 autocmd BufWritePost */alloc/css/src/* :silent       !(make css > /dev/null)
 
 set mouse=
-
-if &diff
-  silent! colorscheme apprentice
-endif
-
 set encoding=utf-8
 set hlsearch
 set nohidden " close tab closes buffer
