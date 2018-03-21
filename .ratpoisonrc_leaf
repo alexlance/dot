@@ -24,9 +24,9 @@ definekey top M-F2 exec
 definekey top M-4 exec ratpoison -c "swap 1" -c "nextscreen"
 definekey top C-Tab focusprev
 
-#exec rpws init 4 -a
-#definekey top C-M-Left rpwsp
-#definekey top C-M-Right rpwsn
+exec rpws init 3 -a
+definekey top C-M-Left rpwsp
+definekey top C-M-Right rpwsn
 
 definekey top C-M-BackSpace quit
 definekey top Pause exec bash /home/alla/bin/mute.sh
@@ -43,9 +43,8 @@ set border 0
 set barpadding 0 0 0 0
 
 #exec rpws init 2 -k
-exec xterm -e "tmux -u"
 
-# To switch windows 
+# To switch windows
 # First see what numbers your windows are:
 # ctrl-space i
 # Then switch the two windows:
