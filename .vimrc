@@ -13,7 +13,7 @@ autocmd BufWritePost */alloc/css/src/* :silent       !(make css > /dev/null)
 set mouse=
 
 if &diff
-  colorscheme apprentice
+  silent! colorscheme apprentice
 endif
 
 set encoding=utf-8
@@ -298,7 +298,7 @@ highlight Search ctermbg=162
 nnoremap <CR> :noh<CR><CR>
 
 set background=dark
-colorscheme hybrid_material
+silent! colorscheme hybrid_material
 
 au BufRead,BufNewFile *.tf setlocal filetype=terraform
 au BufRead,BufNewFile *.tfvars setlocal filetype=terraform
