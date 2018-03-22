@@ -111,7 +111,7 @@ set shiftround        " round to 'shiftwidth' for "<<" and ">>"
 let loaded_matchparen = 1
 
 " This adjusts the title of tmux
-set titleold=
+set titleold=bash
 set t_ts=k
 set t_fs=\
 set title
