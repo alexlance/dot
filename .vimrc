@@ -111,7 +111,7 @@ set shiftround        " round to 'shiftwidth' for "<<" and ">>"
 let loaded_matchparen = 1
 
 " This adjusts the title of tmux
-set titleold=bash
+set titleold=
 set t_ts=k
 set t_fs=\
 set title
@@ -210,9 +210,10 @@ set tabpagemax=500
 
 " Format a whole paragraph nicely
 nmap gb i!gb!<esc>gqip?!gb!<cr>df!
-highlight TabLine       ctermfg=green ctermbg=black cterm=None
-highlight TabLineSel    ctermfg=202
-highlight TabLineFill   term=bold cterm=bold ctermbg=0
+set tabline=
+highlight TabLine       ctermfg=202 ctermbg=None cterm=None
+highlight TabLineSel    ctermfg=white ctermbg=202
+highlight TabLineFill   term=bold cterm=bold ctermbg=None
 
 " open the quickfix window after doing a grep
 autocmd QuickFixCmdPost *grep* cwindow
