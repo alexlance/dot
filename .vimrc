@@ -302,3 +302,7 @@ map <S-Up> <C-y>
 map <S-Down> <C-e>
 inoremap <S-Up> <C-x><C-y>
 inoremap <S-Down> <C-x><C-e>
+
+map <C-n> :cn<CR>
+map <C-p> :cp<CR>
+
