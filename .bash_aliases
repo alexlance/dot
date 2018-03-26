@@ -44,10 +44,6 @@ function authed() {
   fi
 }
 
-function replace() {
-  grep -rsl "${1}" * | tee /dev/stderr | xargs sed -i "s|${1}|${2}|g";
-}
-
 trap 'timer=${timer:-$SECONDS}' DEBUG
 function get_ps1() {
   local e=$?
