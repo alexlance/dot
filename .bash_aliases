@@ -6,7 +6,6 @@ alias ..='cd ..'
 alias ifconfig='/sbin/ifconfig'
 alias s='du -sh * .??* | sort -h | less -S -E -F -R -X'
 alias t='tmux attach -d || tmux'
-#alias startx='ssh-agent xinit /home/alla/.xinitrc -- /etc/X11/xinit/xserverrc :0'
 alias sx='ssh-agent bash -c "ssh-add && startx"'
 alias show_apt_installs='( zcat $( ls -tr /var/log/apt/history.log*.gz ) ; cat /var/log/apt/history.log ) | grep -E "^(Start-Date:|Commandline:)" | grep -v aptdaemon | grep -E "^Commandline:"'
 alias mountPrivate='mount -t ecryptfs -o "noauto,ecryptfs_unlink_sigs,ecryptfs_fnek_sig=80db41800b399816,ecryptfs_key_bytes=16,ecryptfs_cipher=aes,ecryptfs_sig=80db41800b399816,ecryptfs_passthrough=n,key=passphrase" ./Private ./Private'
@@ -25,31 +24,7 @@ export LANG=en_AU.utf8 # fix utf-8 in mutt's email reader
 export PS4='+${BASH_SOURCE}:${LINENO}:${FUNCNAME[0]}: '
 export PS4="$(tput setaf 1 2>/dev/null)$PS4$(tput sgr0 2>/dev/null)"
 export AWS_REGIONS="ap-southeast-2 us-west-2"
-
-function f_ {
-  local yn files insensitive count
-  if [ -n "${@}" ]; then
-    exec 5>&1 # so we can echo out results as they are found, and also capture the output to a variable
-    [[ "${@}" =~ [[:upper:]].* ]] || insensitive="i"
-    files=$(find . -type f -${insensitive}name "*${@}*" -not -path "*.swp" | tee /dev/fd/5)
-    count=$(echo "${files}" | wc -l)
-    [ -n "${files}" ] && read -p "vim (${count} files)? " yn
-    [ "${yn}" = "y" ] && vim -p $(echo ${files} | sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g")
-  fi
-}
-function g_ {
-  local yn files insensitive count
-  if [ -n "${@}" ]; then
-    exec 5>&1 # so we can echo out results as they are found, and also capture the output to a variable
-    [[ "${@}" =~ [[:upper:]].* ]] || insensitive="i"
-    files=$(grep -rs${insensitive} --color=always "${@}" * | tee /dev/fd/5)
-    files=$(echo "${files}" | sed 's/:.*$//' | uniq)
-    count=$(echo "${files}" | wc -l)
-    [ -n "${files}" ] && read -p "vim (${count} files)? " yn
-
-    [ "${yn}" = "y" ] && vim "+/${@}" -p $(echo ${files} | sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g")
-  fi
-}
+export PROMPT_COMMAND="get_ps1"
 
 function chrom() {
   if [ -z "$(pgrep -f 'ssh -N -D')" ]; then
@@ -57,11 +32,6 @@ function chrom() {
   else
     chromium --proxy-server=socks://localhost:2000 --incognito
   fi
-}
-
-function git_branch() {
-  local b=$(git rev-parse --abbrev-ref HEAD 2>/dev/null);
-  [ "${b}" ] && echo " (${b})"
 }
 
 function authed() {
@@ -78,19 +48,30 @@ function replace() {
   grep -rsl "${1}" * | tee /dev/stderr | xargs sed -i "s|${1}|${2}|g";
 }
 
-# to avoid terminal wrapping issues colour escape sequences must be surrounded by \[ and \]
-c_black="\[$(   tput setaf 0 )\]"
-c_red="\[$(     tput setaf 1 )\]"
-c_green="\[$(   tput setaf 2 )\]"
-c_yellow="\[$(  tput setaf 3 )\]"
-c_blue="\[$(    tput setaf 4 )\]"
-c_magenta="\[$( tput setaf 5 )\]"
-c_cyan="\[$(    tput setaf 6 )\]"
-c_white="\[$(   tput setaf 7 )\]"
-c_bold="\[$(    tput bold    )\]"
-c="\[$(         tput sgr0    )\]" # reset
+trap 'timer=${timer:-$SECONDS}' DEBUG
+function get_ps1() {
+  local e=$?
+  # to avoid terminal wrapping issues colour escape sequences must be surrounded by \[ and \]
+  local c_black="\[$(   tput setaf 0 )\]"
+  local c_red="\[$(     tput setaf 1 )\]"
+  local c_green="\[$(   tput setaf 2 )\]"
+  local c_yellow="\[$(  tput setaf 3 )\]"
+  local c_blue="\[$(    tput setaf 4 )\]"
+  local c_magenta="\[$( tput setaf 5 )\]"
+  local c_cyan="\[$(    tput setaf 6 )\]"
+  local c_white="\[$(   tput setaf 7 )\]"
+  local c_bold="\[$(    tput bold    )\]"
+  local c="\[$(         tput sgr0    )\]" # reset
 
-PS1="${c_bold}${c_yellow}\$(authed)${c}\u@\h ${c_bold}${c_blue}\w${c}${c_green}\$(git_branch)${c} "
+  local c_default=${c_white}
+  [ "$e" != 0 ] && c_default="${c_red}"
+
+  local branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null);
+  [ "${branch}" ] && branch=" (${branch})"
+
+  PS1="$(($SECONDS - $timer))s ${c_bold}${c_yellow}\$(authed)${c}${c_default}\u@\h${c} ${c_bold}${c_blue}\w${c}${c_green}${branch}${c} "
+  unset timer
+}
 
 function replace() {
   grep -rsl "${1}" * | tee /dev/stderr | xargs sed -i "s|${1}|${2}|g"
