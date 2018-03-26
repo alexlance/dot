@@ -111,11 +111,11 @@ set shiftround        " round to 'shiftwidth' for "<<" and ">>"
 let loaded_matchparen = 1
 
 " This adjusts the title of tmux
-set titleold=bash
-set t_ts=k
-set t_fs=\
-set title
-autocmd BufEnter * let &titlestring = expand("%:t")
+"set titleold=bash
+"set t_ts=k
+"set t_fs=\
+"set title
+"autocmd BufEnter * let &titlestring = expand("%:t")
 
 " put cursor back where it was last time when re-opening a file
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif

@@ -60,18 +60,10 @@ function chrom() {
 }
 
 function git_branch() {
-  local start
-  local b=$(git branch --color=never 2>/dev/null | grep -E '^\* ' | sed -e 's/^* //')
-  local s=$(git status --porcelain 2>/dev/null)
-  if [ "${s}" ]; then
-    extra='~'
-  else
-    extra='✓'
-  fi
-  if [ "$b" ]; then
-    echo " (${b}${extra})"
-  fi
+  local b=$(git rev-parse --abbrev-ref HEAD 2>/dev/null);
+  [ "${b}" ] && echo " (${b})"
 }
+
 function authed() {
   local numkeys=$(ssh-add -l 2>/dev/null | grep -v 'The agent has no identities' | wc -l)
   if [ "$numkeys" ]; then
@@ -120,6 +112,16 @@ function ter() {
     "sg")    for i in $(grep -E '"sg-(.*)' terraform.tfstate | awk '{print $2}' | sort -u | tr -d '"' | tr -d ','); do echo $i $(aws cache $i); done;;
     *)       command terraform "${@}";;
   esac
+}
+
+settitle() {
+  tmux rename-window -t${TMUX_PANE} "${1}"
+}
+
+function su() {
+  settitle '#[bg=red] root'
+  command su
+  settitle 'bash'
 }
 
 [ -f ~/.bash_aliases_local ] && .  ~/.bash_aliases_local

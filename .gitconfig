@@ -21,6 +21,7 @@
   pullr = pull --rebase
   pp = ! sh -c '(git pull --rebase && git push)'
   pps = ! sh -c '(git stash && git pull --rebase && git push && git stash pop)'
+  ps = ! sh -c '(git stash && git pull --rebase && git stash pop)'
   pr = ! sh -c '(git push origin $(git symbolic-ref --short -q HEAD) && hub pull-request)'
 [filter "noeol"]
   clean = noeol_filter
