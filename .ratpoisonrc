@@ -46,6 +46,9 @@ definekey top F3 exec bash /home/alla/bin/volume.sh down
 
 set border 0
 set barpadding 0 0 0 0
+echo Welcome!
+exec xterm -class UXTerm -title uxterm -u8
+next
 
 #exec rpws init 2 -k
 
