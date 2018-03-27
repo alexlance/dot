@@ -16,7 +16,7 @@ bind right focusright
 bind up focusup
 bind down focusdown
 bind x exec xtrlock
-bind c exec xrdb -merge /home/alla/.Xresources ; xterm -class UXTerm -title uxterm -u8
+bind c exec xterm -class UXTerm -title uxterm -u8
 definekey top M-1 prev
 definekey top M-2 next
 definekey top M-3 nextscreen

@@ -1,6 +1,4 @@
 ! xrdb -merge .Xresources
-! alla xterm settings
-! -fg white -bg black -fa "DejaVu Sans Mono" -fs 11 -si
 UXTerm*background:	rgb:18/18/18
 UXTerm*foreground:	Grey
 UXTerm*faceName:	DejaVu Sans Mono
@@ -18,3 +16,11 @@ UXTerm*cutNewLine: false
 UXTerm*cutToBeginningOfLine: false
 Xcursor.theme: big-cursor
 *customization: -color
+
+Xautolock.time: 10
+Xautolock.locker: xtrlock
+Xautolock.corners: 00+0
+Xautolock.cornerdelay: 1
+Xautolock.cornerredelay: 5
+Xautolock.notify: 1
+Xautolock.notifier: ratpoison -c "echo Locking soon"
