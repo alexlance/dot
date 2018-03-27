@@ -19,5 +19,12 @@ if [ -x /home/alla/bin/xflux ]; then
   [ "$(pidof xflux)" ] || /home/alla/bin/xflux -l "37.8136" -g "144.9631" &
 fi
 
-xautolock &
+if [ "${X_USE_VPN}" ]; then
+  /home/alla/bin/vpn &
+fi
+
+xautolock -time ${X_LOCK_TIME:-10} -locker xtrlock \
+  -corners 00+0 -cornerdelay 1 -cornerredelay 5 -secure \
+  -notify 1 -notifier "ratpoison -c 'echo Locking soon'" &
+
 exec ratpoison

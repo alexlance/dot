@@ -16,11 +16,3 @@ UXTerm*cutNewLine: false
 UXTerm*cutToBeginningOfLine: false
 Xcursor.theme: big-cursor
 *customization: -color
-
-Xautolock.time: 10
-Xautolock.locker: xtrlock
-Xautolock.corners: 00+0
-Xautolock.cornerdelay: 1
-Xautolock.cornerredelay: 5
-Xautolock.notify: 1
-Xautolock.notifier: ratpoison -c "echo Locking soon"

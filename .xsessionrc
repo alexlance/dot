@@ -1,0 +1,2 @@
+export X_USE_VPN=1
+export X_LOCK_TIME=60
