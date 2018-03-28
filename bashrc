@@ -14,7 +14,7 @@ alias grep='grep --exclude=*.pyc --exclude=*.swp --color=auto --exclude-dir=.ter
 alias sssh='ssh -q -o BatchMode=yes -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -t'
 alias chromium='command chromium --audio-buffer-size=2048'
 
-export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:/home/${USER}/bin
 export TERM=xterm-256color
 export EDITOR=vim
 export GOPATH=$HOME/go
