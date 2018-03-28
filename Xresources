@@ -1,5 +1,5 @@
 ! xrdb -merge .Xresources
-UXTerm*background:	rgb:18/18/18
+UXTerm*background:	rgb:0/0/0
 UXTerm*foreground:	Grey
 UXTerm*faceName:	DejaVu Sans Mono
 UXTerm*faceSize: 12
@@ -10,7 +10,7 @@ UXTerm*cursorColor: rgb:00/99/00
 UXTerm*UXTerm: True
 UXTerm*highlightSelection: True
 UXTerm*boldMode: False
-UXTerm*termName: xterm-color
+UXTerm*termName: xterm-256color
 UXTerm*charClass: 33:48,35:48,37:48,42:48,45-47:48,58:48,63-64:48,95:48,126:48
 UXTerm*cutNewLine: false
 UXTerm*cutToBeginningOfLine: false

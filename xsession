@@ -16,7 +16,7 @@ if [ -x /usr/bin/synclient ]; then
 fi
 
 if [ -x /home/alla/bin/xflux ]; then
-  [ "$(pidof xflux)" ] || /home/alla/bin/xflux -l "37.8136" -g "144.9631" &
+  [ "$(pidof xflux)" ] || /home/alla/bin/xflux -l "37.813" -g "144.963" &
 fi
 
 if [ "${X_USE_VPN}" ]; then

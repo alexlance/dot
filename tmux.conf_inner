@@ -7,9 +7,6 @@ bind C-a last-window
 bind -n C-Right next-window
 bind -n C-Left previous-window
 
-#bind -n '[C' next-window
-#bind -n '[D' precious-window
-
 bind | split-window -h
 bind - split-window -v
 bind Q break-pane
@@ -44,12 +41,10 @@ set -g window-status-format ' #W '
 set -g window-status-current-format ' #W '
 set-window-option -g window-status-current-bg red
 set-window-option -g window-status-current-fg white
-set -g default-terminal "xterm-color" 
-# 
+set -g default-terminal "xterm-color"
+#
 # # VERY IMPORTANT - NOPE! HAVING THIS ENABLED SLOWS DOWN THE ESCAPE KEY IN VIM FOR SOME REASON - I'M NOT SHOUTING!
 #set -g xterm-keys on
 
 setw -g mode-keys vi
-
-#bind-key -n C- swap-window -t +1
 bind-key -n C-o swap-window -t -1

@@ -1,10 +1,6 @@
-
 set mark-symlinked-directories on
 set show-all-if-unmodified on
 set show-all-if-ambiguous on
-
-"\e[A": history-search-backward
-"\e[B": history-search-forward
 set completion-ignore-case off
 
 # alt-backspace delete word
@@ -17,5 +13,5 @@ set completion-ignore-case off
 "\e[1;3B": "cd -\n"
 
 # arrow keys
-"\e[OA": history-search-backward
-"\e[OB": history-search-forward
+"\e[A": history-search-backward
+"\e[B": history-search-forward
