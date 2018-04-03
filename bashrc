@@ -81,9 +81,9 @@ function ter() {
 }
 
 function su() {
-  tmux rename-window -t${TMUX_PANE} "#[bg=red] root"
+  [ "${TMUX}" ] && tmux rename-window -t${TMUX_PANE} "#[fg=red]root"
   command su "${@}"
-  tmux rename-window -t${TMUX_PANE} "bash"
+  [ "${TMUX}" ] && tmux rename-window -t${TMUX_PANE} "bash"
 }
 
 [ -f ~/.bashrc.local ] && .  ~/.bashrc.local
