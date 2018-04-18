@@ -156,7 +156,7 @@ set previewheight=25
 map <C-g> <Esc>:Gstatus<CR>
 "map <C-G> :Dispatch! git stash ; git pull --rebase ; git push ; git stash pop<CR>
 
-map <S-F5> :GitGutterToggle<cr>:set invnumber<cr>
+map <S-F5> :GitGutterToggle<cr>:set invnumber<cr>:set invrelativenumber<cr>
 
 cmap w!! w !sudo tee % >/dev/null
 
@@ -198,6 +198,7 @@ highlight Comment ctermfg=238
 highlight LineNr ctermfg=236
 
 set number
+set relativenumber
 set cursorline
 
 highlight cursorline cterm=none
