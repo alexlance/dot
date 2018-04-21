@@ -19,6 +19,15 @@ export GPG_TTY=$(tty)   # for ~/.vim/plugin/gnupg.vim
 export LANG=en_AU.utf8  # fix utf-8 in mutt's email reader
 export AWS_REGIONS="ap-southeast-2 us-west-2"
 
+function mountcrypt() {
+  echo "do something like this: "
+  echo "cryptsetup open /dev/sdd1 disk --type plain --cipher aes-xts-plain64"
+  echo "mount /dev/mapper/disk /mnt/tmp"
+  echo "... use the disk ..."
+  echo "umount /mnt/tmp"
+  echo "cryptsetup close disk"
+}
+
 function chrom() {
   if [ -z "$(pgrep -f 'ssh -N -D')" ]; then
     echo 'vpn not running'
