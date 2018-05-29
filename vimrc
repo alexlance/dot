@@ -37,6 +37,7 @@ set bg=dark
 set grepprg=grep\ -rsin\ $*\ *
 set nojoinspaces      " Use only one space after '.' when joining lines, instead of two
 set shiftround        " round to 'shiftwidth' for "<<" and ">>"
+set nowrapscan        " don't wrap searches around to the top of the file
 
 silent! colorscheme hybrid_material
 
