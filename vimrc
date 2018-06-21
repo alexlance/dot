@@ -38,7 +38,7 @@ set grepprg=grep\ -rsin\ $*\ *
 set nojoinspaces      " Use only one space after '.' when joining lines, instead of two
 set shiftround        " round to 'shiftwidth' for "<<" and ">>"
 set nowrapscan        " don't wrap searches around to the top of the file
-set iskeyword+=-      " make dashes a part of the word chars for eg 'cw' operations
+set iskeyword+=-      " make cw consider the dash character as a normal word char
 
 silent! colorscheme hybrid_material
 
