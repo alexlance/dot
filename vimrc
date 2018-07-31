@@ -199,8 +199,8 @@ highlight Comment ctermfg=238
 "highlight TabLine ctermfg=245
 highlight LineNr ctermfg=236
 
-set number
-set relativenumber
+"set number
+"set relativenumber
 set cursorline
 
 highlight cursorline cterm=none
