@@ -15,16 +15,11 @@ if [ -x /usr/bin/synclient ]; then
   synclient HorizTwoFingerScroll=1
 fi
 
-if [ -x /home/alla/bin/xflux ]; then
-  [ "$(pidof xflux)" ] || /home/alla/bin/xflux -l "37.813" -g "144.963" &
-fi
-
 if [ "${X_USE_VPN}" ]; then
-  /home/alla/bin/vpn &
+  sudo -E /home/alla/bin/vpn &
 fi
 
 xautolock -time ${X_LOCK_TIME:-10} -locker xtrlock \
-  -corners 00+0 -cornerdelay 1 -cornerredelay 5 -secure \
-  -notify 1 -notifier "ratpoison -c 'echo Locking soon'" &
+  -corners 00+0 -cornerdelay 1 -cornerredelay 5 -secure &
 
 exec ratpoison

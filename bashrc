@@ -29,10 +29,10 @@ function mountcrypt() {
 }
 
 function chrom() {
-  if [ -z "$(pgrep -f 'ssh -N -D')" ]; then
+  if [ -z "$(pgrep -f 'vpn')" ]; then
     echo 'vpn not running'
   else
-    chromium --proxy-server=socks://localhost:2000 --incognito
+    chromium --incognito
   fi
 }
 
