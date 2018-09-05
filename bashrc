@@ -95,4 +95,9 @@ function su() {
   [ "${TMUX}" ] && tmux rename-window -t${TMUX_PANE} "bash"
 }
 
+function cd() {
+  pushd "$@" > /dev/null
+  export HERE="${PWD##*/}"
+}
+
 [ -f ~/.bashrc.local ] && .  ~/.bashrc.local
