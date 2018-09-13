@@ -1,3 +1,16 @@
+# If not running interactively, don't do anything
+case $- in
+    *i*) ;;
+      *) return;;
+esac
+
+HISTCONTROL=ignoredups
+HISTSIZE=1000
+HISTFILESIZE=2000
+
+# update the values of LINES and COLUMNS after each command
+shopt -s checkwinsize
+
 alias l='ls -lah --color=auto'
 alias lm='ls -lah --color=always | more'
 alias m='more'
