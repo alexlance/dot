@@ -110,7 +110,7 @@ function su() {
 }
 
 function cd() {
-  pushd "$@" > /dev/null
+  cd "$@"
   export HERE="${PWD##*/}"
 }
 
