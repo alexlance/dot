@@ -10,7 +10,7 @@
   pager = less -XF
 
 [alias]
-  record = ! sh -c '(git add -p -- $@ && git commit) || git reset' --
+  record = ! sh -c '(git add -p -- $@ && git st && git commit && git pps) || git reset' --
   st = status -sb
   co = checkout
   b = branch -v
