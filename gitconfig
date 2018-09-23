@@ -10,20 +10,20 @@
   pager = less -XF
 
 [alias]
-  record = ! sh -c '(git add -p -- $@ && git st && git commit && git pps) || git reset' --
   st = status -sb
   co = checkout
   b = branch -v
   l = log --oneline -20 --format=format:'%ad %Cgreen%h %Cred%an %Creset%s' --date=short
   ll = log --oneline --format=format:'%ad %Cgreen%h %Cred%an %Creset%s' --date=short
   lll = log --oneline --format=format:'%ad %Cgreen%h %Cred%an %Creset%s' --date=short --name-status
-  me = log --oneline --format=format:'%ad %Cgreen%h %Cred%an %Creset%s' --author=alla --date=short
-  pp = ! sh -c '(git pull --rebase && git push)'
-  ps = ! sh -c '(git stash && git pull --rebase && git stash pop)'
-  pps = ! sh -c '(git stash && git pull --rebase && git push && git stash pop)'
+  pp = !git pull --rebase && git push
+  ps = !git stash && git pull --rebase && git stash pop
+  pps = !git stash && git pull --rebase && git push && git stash pop
+  a = !cd -- ${GIT_PREFIX:-.} && git add -N $@ && git add -p $@ && git commit && git status -sb || git reset
+  pr = !git fetch origin pull/$1/head:$1 && git checkout $1 && git diff --name-only $1 $(git merge-base FETCH_HEAD master) && echo
 
-#prs = ! sh -c 'hub pr list -f \"%U [%S] [%au] [%NC comments]%n%t%  l%n%b\"'
 #pr = ! sh -c '(git push origin $(git symbolic-ref --short -q HEAD) && hub pull-request)'
+#prs = ! sh -c 'hub pr list -f \"%U [%S] [%au] [%NC comments]%n%t%  l%n%b\"'
 #git pr list
 #git pr checkout
 #git pull-request
