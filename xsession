@@ -6,7 +6,7 @@ if [ -x /usr/bin/synclient ]; then
   synclient TapButton2=2
   # middle click with two fingers
   synclient ClickFinger2=2
-  #synclient TapButton1=1 noooooo
+  synclient TapButton1=1 # noooooo... ?
   synclient TapButton2=2
   synclient TapAndDragGesture=0
   synclient SingleTapTimeout=300
