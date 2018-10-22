@@ -108,9 +108,24 @@ function su() {
   [ "${TMUX}" ] && tmux rename-window -t${TMUX_PANE} "bash"
 }
 
+#function cd() {
+#  command cd "${@}"
+#  export HERE="${PWD##*/}"
+#}
+
 function cd() {
-  command cd "$@"
-  export HERE="${PWD##*/}"
+  # cd $dir
+  # cd [-1]
+  # cd [-2]
+
+  if [ "${@}" ]; then
+    command cd "${@}" && export HERE="${PWD##*/}" && echo "${PWD}" >> ~/.cdd
+  else
+    local l="$(tail -1 ~/.cdd)"
+    command cd "${l}" && echo ${l}
+    #&& sed -i '$ d' ~/.cdd
+  fi
 }
+
 
 [ -f ~/.bashrc.local ] && .  ~/.bashrc.local
