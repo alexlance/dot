@@ -8,8 +8,10 @@ HISTCONTROL=ignoredups
 HISTSIZE=1000
 HISTFILESIZE=2000
 
-# update the values of LINES and COLUMNS after each command
-shopt -s checkwinsize
+shopt -s checkwinsize # update the values of LINES and COLUMNS after each command
+shopt -s cdspell      # minor errors in the spelling of a directory component in a cd command will be corrected.
+shopt -s cmdhist      # save all lines of a multiple-line command in the same history entry
+shopt -u execfail     # exec process should kill the shell when it exits
 
 alias l='ls -lah --color=auto'
 alias lm='ls -lah --color=always | more'
