@@ -86,48 +86,29 @@ function replace() {
   grep -rsl "${1}" * | tee /dev/stderr | xargs sed -i "s|${1}|${2}|g"
 }
 
-function aws() {
-  case ${1} in
-    "cache") shift; grep $1 /tmp/.awscache | awk '{print $2}';;
-    *) command aws "${@}";;
-  esac
-}
-
-function ter() {
-  case ${1} in
-    "plan")  shift; terraform init && terraform plan -parallelism=100 ${@};;
-    "apply") shift; terraform init && terraform apply -auto-approve -parallelism=100 ${@};;
-    "dns")   grep fqdn terraform.tfstate | awk '{print $2}' | tr -d '"' | tr -d ',';;
-    "ls")    terraform show | grep -E '^[a-zA-Z]' | tr -d ':';;
-    "sg")    for i in $(grep -E '"sg-(.*)' terraform.tfstate | awk '{print $2}' | sort -u | tr -d '"' | tr -d ','); do echo $i $(aws cache $i); done;;
-    *)       command terraform "${@}";;
-  esac
-}
-
 function su() {
   [ "${TMUX}" ] && tmux rename-window -t${TMUX_PANE} "#[fg=red]root"
   command su "${@}"
   [ "${TMUX}" ] && tmux rename-window -t${TMUX_PANE} "bash"
 }
 
-#function cd() {
-#  command cd "${@}"
-#  export HERE="${PWD##*/}"
-#}
-
 function cd() {
-  # cd $dir
-  # cd [-1]
-  # cd [-2]
-
-  if [ "${@}" ]; then
-    command cd "${@}" && export HERE="${PWD##*/}" && echo "${PWD}" >> ~/.cdd
-  else
-    local l="$(tail -1 ~/.cdd)"
-    command cd "${l}" && echo ${l}
-    #&& sed -i '$ d' ~/.cdd
-  fi
+  command cd "${@}"
+  export HERE="${PWD##*/}"
 }
 
+#function cd() {
+#  # cd $dir
+#  # cd [-1]
+#  # cd [-2]
+#
+#  if [ "${@}" ]; then
+#    command cd "${@}" && export HERE="${PWD##*/}" && echo "${PWD}" >> ~/.cdd
+#  else
+#    local l="$(tail -1 ~/.cdd)"
+#    command cd "${l}" && echo ${l}
+#    #&& sed -i '$ d' ~/.cdd
+#  fi
+#}
 
 [ -f ~/.bashrc.local ] && .  ~/.bashrc.local
