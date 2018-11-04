@@ -82,10 +82,6 @@ function get_ps1() {
   PS1="${c_bold}${c_yellow}${auth}${c}${c_default}\u@\h${c} ${c_bold}${c_blue}\w${c}${c_green}${branch}${c} "
 }
 
-function replace() {
-  grep -rsl "${1}" * | tee /dev/stderr | xargs sed -i "s|${1}|${2}|g"
-}
-
 function su() {
   [ "${TMUX}" ] && tmux rename-window -t${TMUX_PANE} "#[fg=red]root"
   command su "${@}"
@@ -95,6 +91,10 @@ function su() {
 function cd() {
   command cd "${@}"
   export HERE="${PWD##*/}"
+}
+
+function vimg() {
+  vim -p $(grep -rsil "${@}" *)
 }
 
 #function cd() {

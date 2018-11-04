@@ -37,8 +37,9 @@ set bg=dark
 set grepprg=grep\ -rsin\ $*\ *
 set nojoinspaces      " Use only one space after '.' when joining lines, instead of two
 set shiftround        " round to 'shiftwidth' for "<<" and ">>"
-set nowrapscan        " don't wrap searches around to the top of the file
+"set nowrapscan        " don't wrap searches around to the top of the file
 set iskeyword+=-      " make cw consider the dash character as a normal word char
+set shortmess+=A      " get rid of 'a swap file already exists' messages
 
 silent! colorscheme hybrid_material
 
@@ -179,6 +180,9 @@ vmap < <gv
 highlight ExtraWhitespace ctermbg=8
 autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+\%#\@<!$/
+
+" Make warning messages bright red
+highlight WarningMsg ctermfg=white ctermbg=red guifg=White guibg=Red gui=None
 
 " Go (golang) whitespace: real tabs.
 autocmd FileType go setlocal sts=2 ts=2 sw=2 tabstop=2 noexpandtab nospell
