@@ -228,3 +228,7 @@ inoremap <S-Down> <C-x><C-e>
 
 map <C-n> :cn<CR>
 map <C-p> :cp<CR>
+
+if &diff
+    colorscheme apprentice
+endif
