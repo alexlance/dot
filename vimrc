@@ -214,7 +214,7 @@ highlight cursorlinenr ctermfg=130
 autocmd BufWritePost *.go :GoInstall
 
 set hlsearch
-highlight Search ctermbg=162
+highlight Search ctermbg=15
 nnoremap <CR> :noh<CR><CR>
 
 au BufRead,BufNewFile *.tf setlocal filetype=terraform
