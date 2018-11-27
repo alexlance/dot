@@ -70,6 +70,9 @@ function get_ps1() {
   local c_default=${c_white}
   [ "$e" != 0 ] && c_default="${c_red}"
 
+  # change prompt color if AWS auth is set
+  [ -v AWS_SECRET_ACCESS_KEY ] && c_default="${c_magenta}"
+
   # add git branch name into prompt
   local branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null);
   [ "${branch}" ] && branch=" (${branch})"
