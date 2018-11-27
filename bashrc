@@ -25,6 +25,7 @@ alias hh='ssh mint /home/alla/bin/heater.sh'
 alias grep='grep --exclude=*.pyc --exclude=*.swp --color=auto --exclude-dir=.terraform --exclude-dir=.git'
 alias sssh='ssh -q -o BatchMode=yes -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -t'
 alias chromium='command chromium --audio-buffer-size=2048'
+alias awshell="aws-vault exec production --no-session -- bash"
 
 export PATH=$PATH:/home/${USER}/bin:/home/${USER}/go/bin/
 export TERM=xterm-256color
@@ -98,12 +99,6 @@ function cd() {
 
 function vimg() {
   vim -p $(grep -rsil "${@}" *)
-}
-
-function av() {
-  local cmd="aws-vault exec production --no-session -- bash"
-  [ "${1}" ] && cmd="aws-vault exec production --no-session -- ${@}"
-  ${cmd}
 }
 
 #function cd() {
