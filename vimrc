@@ -232,3 +232,8 @@ map <C-p> :cp<CR>
 if &diff
     colorscheme apprentice
 endif
+
+" auto format a bash file on save
+" mz = make a mark, gg=G = format whole file, `z = move to first mark
+filetype plugin indent on
+autocmd BufWritePre *.sh normal mzgg=G`z

@@ -100,6 +100,12 @@ function vimg() {
   vim -p $(grep -rsil "${@}" *)
 }
 
+function av() {
+  local cmd="aws-vault exec work -- bash"
+  [ "${1}" ] && cmd="aws-vault exec work -- ${@}"
+  ${cmd}
+}
+
 #function cd() {
 #  # cd $dir
 #  # cd [-1]
