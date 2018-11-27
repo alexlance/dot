@@ -101,8 +101,8 @@ function vimg() {
 }
 
 function av() {
-  local cmd="aws-vault exec work -- bash"
-  [ "${1}" ] && cmd="aws-vault exec work -- ${@}"
+  local cmd="aws-vault exec production -- bash"
+  [ "${1}" ] && cmd="aws-vault exec production -- ${@}"
   ${cmd}
 }
 
