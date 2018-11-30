@@ -35,6 +35,16 @@ export GPG_TTY=$(tty)   # for ~/.vim/plugin/gnupg.vim
 export LANG=en_AU.utf8  # fix utf-8 in mutt's email reader
 export AWS_REGIONS="ap-southeast-2 us-west-2"
 
+# store the current ssh socket if any, into a file
+if [ -v SSH_AUTH_SOCK ] && [ -v SSH_CLIENT ]; then
+  socket="/home/alla/.ssh/sockets/${SSH_CLIENT%% *}.sock"
+  if [ ! -f ${socket} ] || [ "${SSH_AUTH_SOCK}" != "$(cat ${socket})" ]; then
+    echo "${SSH_AUTH_SOCK}" > ${socket}
+    echo "updated: ${socket}"
+  fi
+  unset socket
+fi
+
 function mountcrypt() {
   echo "do something like this: "
   echo "cryptsetup open /dev/sdd1 disk --type plain --cipher aes-xts-plain64"
@@ -77,6 +87,9 @@ function get_ps1() {
   # add git branch name into prompt
   local branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null);
   [ "${branch}" ] && branch=" (${branch})"
+
+  # re-obtain an ssh-agent socket for tmux
+  [ -f ~/.ssh/sockets/${SSH_CLIENT%% *}.sock ] && export SSH_AUTH_SOCK=$(cat ~/.ssh/sockets/${SSH_CLIENT%% *}.sock)
 
   # print a smiley for every ssh key added to my ssh-agent
   local numkeys=$(ssh-add -l 2>/dev/null | grep -v 'The agent has no identities' | wc -l)
