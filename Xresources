@@ -1,18 +1,19 @@
 ! xrdb -merge .Xresources
-UXTerm*background:	rgb:0/0/0
-UXTerm*foreground:	Grey
-UXTerm*faceName:	DejaVu Sans Mono
-UXTerm*faceSize: 12
-UXTerm*scrollTtyOutput: False
-UXTerm*cursorBlink: False
-UXTerm*saveLines: 10000
-UXTerm*cursorColor: rgb:00/99/00
-UXTerm*UXTerm: True
-UXTerm*highlightSelection: True
-UXTerm*boldMode: False
-UXTerm*termName: xterm-256color
-UXTerm*charClass: 33:48,35:48,37:48,42:48,45-47:48,58:48,63-64:48,95:48,126:48
-UXTerm*cutNewLine: false
-UXTerm*cutToBeginningOfLine: false
+xterm*background:	rgb:0/0/0
+xterm*foreground:	Grey
+xterm*faceName:	DejaVu Sans Mono
+xterm*faceSize: 11
+xterm*scrollTtyOutput: False
+xterm*cursorBlink: False
+xterm*saveLines: 10000
+xterm*UXTerm: True
+xterm*highlightSelection: True
+xterm*boldMode: False
+xterm*termName: xterm-256color
+xterm*on2Clicks: regex [^ \n]+
+xterm*on3Clicks: regex [^#\n]+
+xterm*cutNewLine: false
+xterm*cutToBeginningOfLine: false
+xterm*utf8: 1
 Xcursor.theme: big-cursor
 *customization: -color

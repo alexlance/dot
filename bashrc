@@ -4,10 +4,6 @@ case $- in
       *) return;;
 esac
 
-HISTCONTROL=ignoredups
-HISTSIZE=1000
-HISTFILESIZE=2000
-
 shopt -s checkwinsize # update the values of LINES and COLUMNS after each command
 shopt -s cdspell      # minor errors in the spelling of a directory component in a cd command will be corrected.
 shopt -s cmdhist      # save all lines of a multiple-line command in the same history entry
@@ -35,6 +31,10 @@ export GOPATH=$HOME/go
 export GPG_TTY=$(tty)   # for ~/.vim/plugin/gnupg.vim
 export LANG=en_AU.utf8  # fix utf-8 in mutt's email reader
 export AWS_REGIONS="ap-southeast-2 us-west-2"
+export HISTCONTROL="ignoredups"
+export HISTSIZE=1000
+export HISTFILESIZE=2000
+
 
 # store the current ssh socket if any, into a file
 if [ -v SSH_AUTH_SOCK ] && [ -v SSH_CLIENT ]; then
@@ -53,14 +53,6 @@ function mountcrypt() {
   echo "... use the disk ..."
   echo "umount /mnt/tmp"
   echo "cryptsetup close disk"
-}
-
-function chrom() {
-  if [ -z "$(pgrep -f 'vpn')" ]; then
-    echo 'vpn not running'
-  else
-    chromium --incognito
-  fi
 }
 
 PROMPT_COMMAND="get_ps1" # don't export this, as it will affect su
@@ -97,7 +89,7 @@ function get_ps1() {
   [ "${numkeys}" -gt "0" ] && local auth=$(printf '☻%.0s' "{1..$numkeys}")
 
   # declare the prompt
-  PS1="${c_bold}${c_yellow}${auth}${c}${c_default}\u@\h${c} ${c_bold}${c_blue}\w${c}${c_green}${branch}${c} "
+  PS1="${c_bold}${c_yellow}${auth}${c}${c_default}\u@\h${c} ${c_bold}${c_blue}\w${c}${c_green}${branch}${c} # "
 }
 
 function su() {
