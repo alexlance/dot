@@ -19,5 +19,8 @@ if [ "${X_USE_VPN}" ]; then
   sudo -E /home/alla/bin/vpn &
 fi
 
+killall ssh-agent || true
+ssh-agent -k || true
+
 xautolock -time ${X_LOCK_TIME:-10} -locker xtrlock -secure &
-exec ratpoison
+exec ssh-agent -t 10h ratpoison

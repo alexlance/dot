@@ -25,7 +25,6 @@ alias mountPrivate='mount -t ecryptfs -o "noauto,ecryptfs_unlink_sigs,ecryptfs_f
 alias hh='ssh mint /home/alla/bin/heater.sh'
 alias grep='grep --exclude=*.pyc --exclude=*.swp --color=auto --exclude-dir=.terraform --exclude-dir=.git'
 alias sssh='ssh -q -o BatchMode=yes -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -t'
-alias ssh-add='ssh-add -t 10h'
 alias chromium='command chromium --audio-buffer-size=2048'
 alias awshell="aws-vault exec production --no-session -- bash -l"
 
