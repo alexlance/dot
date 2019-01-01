@@ -10,7 +10,7 @@ xterm*UXTerm: True
 xterm*highlightSelection: True
 xterm*boldMode: False
 xterm*termName: xterm-256color
-xterm*on2Clicks: regex [^ \n]+
+xterm*on2Clicks: regex [^ \n|]+
 xterm*on3Clicks: regex [^#\n]+
 xterm*cutNewLine: false
 xterm*cutToBeginningOfLine: false
