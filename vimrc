@@ -11,7 +11,7 @@ if exists("syntax_on")
 endi
 syntax on
 
-set mouse=
+set mouse=a " let's try with mouse enabled
 set encoding=utf-8
 set hlsearch
 set nohidden " close tab closes buffer
