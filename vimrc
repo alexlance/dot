@@ -4,6 +4,11 @@ execute pathogen#infect()
 set viminfo+=n~/.vim/viminfo
 filetype on
 filetype plugin on
+
+hi clear
+if exists("syntax_on")
+  syntax reset
+endi
 syntax on
 
 set mouse=
@@ -206,9 +211,21 @@ highlight LineNr ctermfg=236
 "set number
 "set relativenumber
 set cursorline
-
-highlight cursorline cterm=none
+highlight cursorline cterm=none ctermbg=234
 highlight cursorlinenr ctermfg=130
+
+" better lines to delineate windows
+hi VertSplit   ctermbg=NONE cterm=NONE
+hi StatusLine   ctermbg=NONE cterm=NONE
+hi StatusLineNC ctermbg=NONE cterm=NONE
+set fillchars=stl:—,stlnc:—,vert:│
+
+" current window gets cursorline, all others do not
+augroup CursorLineOnlyInActiveWindow
+  autocmd!
+  autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+  autocmd WinLeave * setlocal nocursorline
+augroup END
 
 " compile and install go programs on save
 autocmd BufWritePost *.go :GoInstall
