@@ -11,7 +11,7 @@ if exists("syntax_on")
 endi
 syntax on
 
-set mouse=a " let's try with mouse enabled
+set mouse=
 set encoding=utf-8
 set hlsearch
 set nohidden " close tab closes buffer
@@ -83,10 +83,16 @@ nnoremap ; :
 map <C-P> gqip
 map <C-J> <Esc>:%!python -m json.tool<CR>
 
+" python folding
+set foldmethod=indent
+set foldnestmax=2
+
 " omni autocompletions per-language
 autocmd FileType python set omnifunc=pythoncomplete#Complete
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python set foldlevel=1
+autocmd FileType python set foldmethod=indent
+autocmd FileType python set foldnestmax=2
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
