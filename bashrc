@@ -22,7 +22,6 @@ alias hh='ssh mint /home/alla/bin/heater.sh'
 alias grep='grep --exclude=*.pyc --exclude=*.swp --color=auto --exclude-dir=.terraform --exclude-dir=.git'
 alias sssh='ssh -q -o BatchMode=yes -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -t'
 alias chromium='command chromium --audio-buffer-size=2048'
-alias awshell="timeout 10h aws-vault exec production --no-session -- bash -l"
 
 export PATH=$PATH:/home/${USER}/bin:/home/${USER}/go/bin/
 export TERM=xterm-256color
@@ -45,6 +44,10 @@ if [ -v SSH_AUTH_SOCK ] && [ -v SSH_CLIENT ]; then
   fi
   unset socket
 fi
+
+function awshell() {
+  timeout 10h aws-vault exec ${1:-production} --no-session -- bash -l
+}
 
 function mountcrypt() {
   echo "do something like this: "
