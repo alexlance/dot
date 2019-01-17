@@ -227,6 +227,9 @@ hi StatusLine   ctermbg=NONE cterm=NONE
 hi StatusLineNC ctermbg=NONE cterm=NONE
 set fillchars=stl:—,stlnc:—,vert:│
 
+" fold markers
+hi Folded ctermbg=NONE ctermfg=202
+
 " current window gets cursorline, all others do not
 augroup CursorLineOnlyInActiveWindow
   autocmd!
