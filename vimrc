@@ -45,6 +45,17 @@ set shiftround        " round to 'shiftwidth' for "<<" and ">>"
 "set nowrapscan        " don't wrap searches around to the top of the file
 set iskeyword+=-      " make cw consider the dash character as a normal word char
 set shortmess+=A      " get rid of 'a swap file already exists' messages
+set ff=unix
+set ttyfast
+set foldmethod=indent
+set foldnestmax=1
+set showtabline=2
+set tabpagemax=500
+set tabline=
+set copyindent
+set backup
+set backupdir=/home/alla/.vim/tmp/
+set dir=/home/alla/.vim/tmp/
 
 silent! colorscheme hybrid_material
 
@@ -73,7 +84,6 @@ function! SuperTab()
 endfunction
 inoremap <Tab> <C-R>=SuperTab()<CR>
 
-set ttyfast
 noremap j gj
 noremap k gk
 let mapleader=","
@@ -83,20 +93,17 @@ nnoremap ; :
 map <C-P> gqip
 map <C-J> <Esc>:%!python -m json.tool<CR>
 
-" python folding
-set foldmethod=indent
-set foldnestmax=2
 
 " omni autocompletions per-language
 autocmd FileType python set omnifunc=pythoncomplete#Complete
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python set foldlevel=1
-autocmd FileType python set foldmethod=indent
-autocmd FileType python set foldnestmax=2
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+autocmd FileType go setlocal sts=2 ts=2 sw=2 tabstop=2 noexpandtab nospell
+autocmd FileType php setlocal sts=2 ts=2 sw=2 tabstop=2 expandtab nospell
+autocmd FileType python setlocal sts=2 ts=2 sw=2 tabstop=2 expandtab nospell
 autocmd BufRead,BufNewFile *.screenplay    set filetype=screenplay
 autocmd BufWritePost */alloc/javascript/*.js :silent !(make cache > /dev/null)
 autocmd BufWritePost */alloc/css/src/* :silent       !(make css > /dev/null)
@@ -133,7 +140,6 @@ abbreviate definately definitely
 abbreviate oppurtunity opportunity
 abbreviate alot a lot
 nmap gb i!gb!<esc>gqip?!gb!<cr>df!
-set ff=unix
 
 if (v:version >= 700)
 highlight SpellBad      ctermfg=Red         ctermbg=none
@@ -149,12 +155,9 @@ nmap [1;2D :tabp<CR>
 nmap [1;2C :tabn<CR>
 imap [1;2D <Esc>:tabp<CR>
 imap [1;2C <Esc>:tabn<CR>
-set showtabline=2
-set tabpagemax=500
 
 " Format a whole paragraph nicely
 nmap gb i!gb!<esc>gqip?!gb!<cr>df!
-set tabline=
 highlight TabLine       ctermfg=202 ctermbg=None cterm=None
 highlight TabLineSel    ctermfg=white ctermbg=202
 highlight TabLineFill   term=bold cterm=bold ctermbg=None
@@ -196,29 +199,15 @@ match ExtraWhitespace /\s\+\%#\@<!$/
 " Make warning messages bright red
 highlight WarningMsg ctermfg=white ctermbg=red guifg=White guibg=Red gui=None
 
-" Go (golang) whitespace: real tabs.
-autocmd FileType go setlocal sts=2 ts=2 sw=2 tabstop=2 noexpandtab nospell
-autocmd FileType php setlocal sts=2 ts=2 sw=2 tabstop=2 expandtab nospell
-autocmd FileType python setlocal sts=2 ts=2 sw=2 tabstop=2 expandtab nospell
-
-set copyindent
-
-" turn on backup
-set backup
-set backupdir=/home/alla/.vim/tmp/
-set dir=/home/alla/.vim/tmp/
-
 " list char
 highlight SpecialKey ctermfg=236
 highlight Comment ctermfg=238
-"highlight TabLineSel ctermfg=White
-"highlight TabLine ctermfg=245
 highlight LineNr ctermfg=236
 
 "set number
 "set relativenumber
 set cursorline
-highlight cursorline cterm=none ctermbg=234
+highlight cursorline cterm=none ctermbg=232
 highlight cursorlinenr ctermfg=130
 
 " better lines to delineate windows
