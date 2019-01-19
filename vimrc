@@ -24,7 +24,7 @@ set bs=2
 set sw=2
 set background=dark
 set backspace=indent,eol,start
-set laststatus=2
+set laststatus=0
 set highlight=sb
 set t_kb=       " Nested screens change $TERM and render delete useles (ctrl-v + Backspace)
 set scrolloff=3
@@ -186,10 +186,6 @@ nnoremap Y y$
 let s:undoDir = "/home/alla/.vim/undo"
 let &undodir=s:undoDir
 set undofile
-
-" keeps the current visual block selection active after changing indent with '<' or '>'
-vmap > >gv
-vmap < <gv
 
 " Highlight trailing whitespace etc
 highlight ExtraWhitespace ctermbg=8
