@@ -40,9 +40,10 @@ definekey top M-c exec bash -c "xclip -o | xclip -sel c && ratpoison -c \"echo s
 
 definekey top F1 exec sudo /home/alla/bin/brightness.sh down
 definekey top F2 exec sudo /home/alla/bin/brightness.sh up
-definekey top F5 exec sudo /home/alla/bin/leds_keyboard.sh down
-definekey top F6 exec sudo /home/alla/bin/leds_keyboard.sh up
+#definekey top F5 exec sudo /home/alla/bin/leds_keyboard.sh down
+#definekey top F6 exec sudo /home/alla/bin/leds_keyboard.sh up
 
+definekey top F4 exec sh /home/alla/bin/mute.sh
 definekey top F10 exec sh /home/alla/bin/mute_leaf.sh
-definekey top F11 exec sh /home/alla/bin/volume.sh down
-definekey top F12 exec sh /home/alla/bin/volume.sh up
+definekey top F5 exec sh /home/alla/bin/volume.sh down
+definekey top F6 exec sh /home/alla/bin/volume.sh up

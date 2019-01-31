@@ -4,3 +4,13 @@ keysym Caps_Lock = Escape
 ! mod4 affects the caps-lock -> escape key AND the right-option -> control key (for laptop)
 clear mod4
 add control = Super_R
+
+!! left windows key
+!add mod4 = Super_L
+
+!keycode 111 = Up NoSymbol Up
+!keycode 116 = Down NoSymbol Down
+!keycode 113 = Left NoSymbol Left
+!keycode 114 = Right NoSymbol Right
+
+
