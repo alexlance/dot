@@ -23,7 +23,7 @@ alias hh='ssh mint /home/alla/bin/heater.sh'
 alias grep='grep --exclude=*.pyc --exclude=*.swp --color=auto --exclude-dir=.terraform --exclude-dir=.git'
 alias sssh='ssh -q -o BatchMode=yes -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -t'
 alias chromium='command chromium --audio-buffer-size=2048'
-alias firefox='MOZ_USE_XINPUT2=1 command firefox'
+alias firefox='MOZ_USE_XINPUT2=1 command firefox > /dev/null 2>&1'
 
 export PATH=$PATH:/home/${USER}/bin:/home/${USER}/go/bin/
 export TERM=xterm-256color
@@ -38,7 +38,7 @@ export HISTFILESIZE=2000
 
 
 # store the current ssh socket if any, into a file
-if [ -v SSH_AUTH_SOCK ] && [ -v SSH_CLIENT ]; then
+if [ -v SSH_AUTH_SOCK ] && [ -v SSH_CLIENT ] && [ -d ~/.ssh/sockets/ ]; then
   socket="/home/alla/.ssh/sockets/${SSH_CLIENT%% *}.sock"
   if [ ! -f ${socket} ] || [ "${SSH_AUTH_SOCK}" != "$(cat ${socket})" ]; then
     echo "${SSH_AUTH_SOCK}" > ${socket}
@@ -77,17 +77,20 @@ function get_ps1() {
 
   # make prompt red if previous command exited non-zero
   local c_default=${c_white}
-  [ "$e" != 0 ] && c_default="${c_red}"
+  [ "$e" != 0 ] && c_default="${c_yellow}"
 
   # change prompt color if AWS auth is set
   [ -v AWS_SECRET_ACCESS_KEY ] && c_default="${c_magenta}"
+
+  # change colour if we're root from su (see /root/.bashrc as well)
+  [ "$(id -u)" = "0" ] && c_default="${c_red}"
 
   # add git branch name into prompt
   local branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null);
   [ "${branch}" ] && branch=" (${branch})"
 
   # re-obtain an ssh-agent socket for tmux
-  [ -f ~/.ssh/sockets/${SSH_CLIENT%% *}.sock ] && export SSH_AUTH_SOCK=$(cat ~/.ssh/sockets/${SSH_CLIENT%% *}.sock)
+  [ -f /home/alla/.ssh/sockets/${SSH_CLIENT%% *}.sock ] && export SSH_AUTH_SOCK=$(cat /home/alla/.ssh/sockets/${SSH_CLIENT%% *}.sock)
 
   # print a smiley for every ssh key added to my ssh-agent
   local numkeys=$(ssh-add -l 2>/dev/null | grep -v 'The agent has no identities' | wc -l)
@@ -127,4 +130,4 @@ function vimg() {
 #}
 
 [ -f /etc/bash_completion ] && . /etc/bash_completion
-[ -f ~/.bashrc.local ] && .  ~/.bashrc.local
+[ -f /home/alla/.bashrc.local ] && . /home/alla/.bashrc.local

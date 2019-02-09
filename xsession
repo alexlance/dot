@@ -1,22 +1,18 @@
-xmodmap /home/alla/.Xmodmap
+xmodmap -e 'remove lock = Caps_Lock'
+xmodmap -e 'keysym Caps_Lock = Escape'
+xmodmap -e 'clear mod4'
+xmodmap -e 'add control = Super_R'
 
 if [ -x /usr/bin/synclient ]; then
-  synclient RightButtonAreaLeft=900 # lyra
-  synclient ClickFinger2=2
-  synclient TapButton2=2
-  # middle click with two fingers
-  synclient ClickFinger2=2
-  synclient TapButton1=1 # noooooo... ?
-  synclient TapButton2=2
-  synclient TapAndDragGesture=0
-  synclient SingleTapTimeout=300
-  synclient PalmDetect=1
-  synclient PalmMinWidth=40
-  synclient HorizTwoFingerScroll=1
-fi
-
-if [ "${X_USE_VPN}" ]; then
-  sudo -E /home/alla/bin/vpn &
+  synclient RightButtonAreaLeft=900  # y-coord of the touchpad that delineate left vs right-click
+  synclient TapButton1=1             # a one finger TAP   = left click
+  synclient TapButton2=2             # a two finger TAP   = middle click
+  synclient ClickFinger2=2           # a two finger CLICK = middle click
+  synclient TapAndDragGesture=0      # disable tap and drap
+  synclient SingleTapTimeout=300     # single tap vs double tap time
+  synclient PalmDetect=1             # prevent palm grazing the touchpad
+  synclient PalmMinWidth=40          # how wide is a palm
+  synclient HorizTwoFingerScroll=1   # scroll sideways with two fingers
 fi
 
 killall ssh-agent || true
