@@ -1,4 +1,4 @@
-escape C-space
+escape Super_L
 startup_message off
 echo Welcome!
 
@@ -7,43 +7,28 @@ set barpadding 8 8
 set bargravity n
 set inputwidth 500
 
-exec xterm -class UXTerm -title uxterm -u8
-
-bind left focusleft
-bind right focusright
-bind up focusup
-bind down focusdown
-bind x exec xtrlock -b
-bind c exec xterm -class UXTerm -title uxterm -u8
+definekey top M-x exec xtrlock -b
+definekey top M-c exec xterm -class UXTerm -title uxterm -u8 -fs 19
+definekey top M-s exec bash -c "xclip -o | xclip -sel c && ratpoison -c \"echo selection copied\""
 definekey top M-1 prev
 definekey top M-2 next
 definekey top M-3 nextscreen
+definekey top M-4 exec ratpoison -c "swap 1"
 definekey top M-Tab focusprev
 definekey top M-F2 exec
-definekey top M-4 exec ratpoison -c "swap 1"
-definekey top C-Tab focusprev
+definekey top C-M-BackSpace quit
+definekey top Print exec bash /home/alla/bin/screenshot.sh
+definekey top XF86HomePage exec bash /home/alla/bin/heater.sh
+definekey top Scroll_Lock exec bash /home/alla/bin/heater.sh
+definekey top XF86MonBrightnessDown exec /home/alla/bin/brightness.sh down
+definekey top XF86MonBrightnessUp exec /home/alla/bin/brightness.sh up
+definekey top Pause exec bash /home/alla/bin/mute.sh
+definekey top XF86AudioMute exec sh /home/alla/bin/mute.sh
+definekey top XF86Tools exec bash /home/alla/bin/mute.sh
+definekey top XF86AudioMedia exec bash /home/alla/bin/mute.sh
+definekey top XF86AudioLowerVolume exec sh /home/alla/bin/volume.sh down
+definekey top XF86AudioRaiseVolume exec sh /home/alla/bin/volume.sh up
 
 exec rpws init 3 -a
 definekey top C-M-Left rpwsp
 definekey top C-M-Right rpwsn
-
-definekey top C-M-BackSpace quit
-definekey top Pause exec bash /home/alla/bin/mute.sh
-definekey top XF86Tools exec bash /home/alla/bin/mute.sh
-definekey top Print exec bash /home/alla/bin/screenshot.sh
-
-definekey top XF86AudioMedia exec bash /home/alla/bin/mute.sh
-definekey top XF86HomePage exec bash /home/alla/bin/heater.sh
-definekey top Scroll_Lock exec bash /home/alla/bin/heater.sh
-
-definekey top M-c exec bash -c "xclip -o | xclip -sel c && ratpoison -c \"echo selection copied\""
-
-definekey top F1 exec /home/alla/bin/brightness.sh down
-definekey top F2 exec /home/alla/bin/brightness.sh up
-#definekey top F5 exec sudo /home/alla/bin/leds_keyboard.sh down
-#definekey top F6 exec sudo /home/alla/bin/leds_keyboard.sh up
-
-definekey top F4 exec sh /home/alla/bin/mute.sh
-definekey top F10 exec sh /home/alla/bin/mute_leaf.sh
-definekey top F5 exec sh /home/alla/bin/volume.sh down
-definekey top F6 exec sh /home/alla/bin/volume.sh up
