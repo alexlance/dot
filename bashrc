@@ -8,6 +8,7 @@ shopt -s checkwinsize # update the values of LINES and COLUMNS after each comman
 shopt -s cdspell      # minor errors in the spelling of a directory component in a cd command will be corrected.
 shopt -s cmdhist      # save all lines of a multiple-line command in the same history entry
 shopt -u execfail     # exec process should kill the shell when it exits
+shopt -s histappend   # append to history file, don't overwrite it
 
 alias l='ls -lah --color=auto'
 alias lm='ls -lah --color=always | more'
@@ -125,4 +126,5 @@ function vimg() {
 #  fi
 #}
 
+[ -f /etc/bash_completion ] && . /etc/bash_completion
 [ -f ~/.bashrc.local ] && .  ~/.bashrc.local
