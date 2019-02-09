@@ -38,8 +38,8 @@ definekey top Scroll_Lock exec bash /home/alla/bin/heater.sh
 
 definekey top M-c exec bash -c "xclip -o | xclip -sel c && ratpoison -c \"echo selection copied\""
 
-definekey top F1 exec sudo /home/alla/bin/brightness.sh down
-definekey top F2 exec sudo /home/alla/bin/brightness.sh up
+definekey top F1 exec /home/alla/bin/brightness.sh down
+definekey top F2 exec /home/alla/bin/brightness.sh up
 #definekey top F5 exec sudo /home/alla/bin/leds_keyboard.sh down
 #definekey top F6 exec sudo /home/alla/bin/leds_keyboard.sh up
 
