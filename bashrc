@@ -35,6 +35,7 @@ export AWS_REGIONS="ap-southeast-2 us-west-2"
 export HISTCONTROL="ignoredups"
 export HISTSIZE=1000
 export HISTFILESIZE=2000
+export HISTTIMEFORMAT='%F %T '
 
 
 # store the current ssh socket if any, into a file
@@ -61,8 +62,12 @@ function mountcrypt() {
 }
 
 PROMPT_COMMAND="get_ps1" # don't export this, as it will affect su
+prev_command="$(history 1)"
 function get_ps1() {
   local e=$?
+  local latest_command="${prev_command}" # global
+  prev_command="$(history 1)"
+
   # to avoid terminal wrapping issues colour escape sequences must be surrounded by \[ and \]
   local c_black="\[$(   tput setaf 0 )\]"
   local c_red="\[$(     tput setaf 1 )\]"
@@ -77,7 +82,7 @@ function get_ps1() {
 
   # make prompt red if previous command exited non-zero
   local c_default=${c_white}
-  [ "$e" != 0 ] && c_default="${c_yellow}"
+  [ "$e" != 0 ] && [ "${latest_command}" != "${prev_command}" ] && c_default="${c_red}"
 
   # change prompt color if AWS auth is set
   [ -v AWS_SECRET_ACCESS_KEY ] && c_default="${c_magenta}"
