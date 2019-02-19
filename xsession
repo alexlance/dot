@@ -22,8 +22,5 @@ xrandr --newmode "2400x1600" 326.00  2400 2584 2840 3280  1600 1603 1613 1658 -h
 xrandr --addmode eDP-1 "2400x1600"
 xrandr --output eDP-1 --mode "2400x1600"
 
-# xinput --get-feedbacks 11
-xinput --set-ptr-feedback 11 100 15 4
-
 xautolock -time ${X_LOCK_TIME:-10} -locker xtrlock -secure &
 exec ssh-agent -t 10h ratpoison
