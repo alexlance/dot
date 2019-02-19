@@ -10,6 +10,7 @@ set inputwidth 500
 definekey top M-x exec xtrlock -b
 definekey top M-c exec xterm -class UXTerm -title uxterm -u8 -fs 19
 definekey top M-s exec bash -c "xclip -o | xclip -sel c && ratpoison -c \"echo selection copied\""
+definekey top M-b exec bash -c "firefox $(xclip -o)"
 definekey top M-1 prev
 definekey top M-2 next
 definekey top M-3 nextscreen
