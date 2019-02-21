@@ -8,6 +8,7 @@ shopt -s checkwinsize # update the values of LINES and COLUMNS after each comman
 shopt -s cdspell      # minor errors in the spelling of a directory component in a cd command will be corrected.
 shopt -s cmdhist      # save all lines of a multiple-line command in the same history entry
 shopt -u execfail     # exec process should kill the shell when it exits
+shopt -s histappend   # append to history file, don't overwrite it
 
 alias l='ls -lah --color=auto'
 alias lm='ls -lah --color=always | more'
@@ -33,10 +34,11 @@ export AWS_REGIONS="ap-southeast-2 us-west-2"
 export HISTCONTROL="ignoredups"
 export HISTSIZE=1000
 export HISTFILESIZE=2000
+export HISTTIMEFORMAT='%F %T '
 
 
 # store the current ssh socket if any, into a file
-if [ -v SSH_AUTH_SOCK ] && [ -v SSH_CLIENT ]; then
+if [ -v SSH_AUTH_SOCK ] && [ -v SSH_CLIENT ] && [ -d ~/.ssh/sockets/ ]; then
   socket="/home/alla/.ssh/sockets/${SSH_CLIENT%% *}.sock"
   if [ ! -f ${socket} ] || [ "${SSH_AUTH_SOCK}" != "$(cat ${socket})" ]; then
     echo "${SSH_AUTH_SOCK}" > ${socket}
@@ -59,8 +61,11 @@ function mountcrypt() {
 }
 
 PROMPT_COMMAND="get_ps1" # don't export this, as it will affect su
+prev_command="$(history 1)"
 function get_ps1() {
   local e=$?
+  local latest_command="${prev_command}" # global
+  prev_command="$(history 1)"
   # to avoid terminal wrapping issues colour escape sequences must be surrounded by \[ and \]
   local c_black="\[$(   tput setaf 0 )\]"
   local c_red="\[$(     tput setaf 1 )\]"
@@ -75,17 +80,20 @@ function get_ps1() {
 
   # make prompt red if previous command exited non-zero
   local c_default=${c_white}
-  [ "$e" != 0 ] && c_default="${c_red}"
+  [ "$e" != 0 ] && [ "${latest_command}" != "${prev_command}" ] && c_default="${c_red}"
 
   # change prompt color if AWS auth is set
   [ -v AWS_SECRET_ACCESS_KEY ] && c_default="${c_magenta}"
+
+  # change colour if we're root from su (see /root/.bashrc as well)
+  [ "$(id -u)" = "0" ] && c_default="${c_red}"
 
   # add git branch name into prompt
   local branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null);
   [ "${branch}" ] && branch=" (${branch})"
 
   # re-obtain an ssh-agent socket for tmux
-  [ -f ~/.ssh/sockets/${SSH_CLIENT%% *}.sock ] && export SSH_AUTH_SOCK=$(cat ~/.ssh/sockets/${SSH_CLIENT%% *}.sock)
+  [ -f /home/alla/.ssh/sockets/${SSH_CLIENT%% *}.sock ] && export SSH_AUTH_SOCK=$(cat /home/alla/.ssh/sockets/${SSH_CLIENT%% *}.sock)
 
   # print a smiley for every ssh key added to my ssh-agent
   local numkeys=$(ssh-add -l 2>/dev/null | grep -v 'The agent has no identities' | wc -l)
@@ -124,4 +132,5 @@ function vimg() {
 #  fi
 #}
 
-[ -f ~/.bashrc.local ] && .  ~/.bashrc.local
+[ -f /etc/bash_completion ] && . /etc/bash_completion
+[ -f /home/alla/.bashrc.local ] && . /home/alla/.bashrc.local

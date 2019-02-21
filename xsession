@@ -1,4 +1,8 @@
-xmodmap /home/alla/.Xmodmap
+xmodmap -e 'remove lock = Caps_Lock'
+xmodmap -e 'keysym Caps_Lock = Escape'
+xmodmap -e 'clear mod4'
+xmodmap -e 'add control = Super_R'
+
 
 if [ -x /usr/bin/synclient ]; then
   synclient RightButtonAreaLeft=1
