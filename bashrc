@@ -136,3 +136,8 @@ function vimg() {
 
 [ -f /etc/bash_completion ] && . /etc/bash_completion
 [ -f /home/alla/.bashrc.local ] && . /home/alla/.bashrc.local
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
