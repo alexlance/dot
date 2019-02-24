@@ -1,5 +1,6 @@
-escape Super_L
+escape C-space
 startup_message off
+exec rpws init 3 -a
 echo Welcome!
 
 set border 0
@@ -7,29 +8,28 @@ set barpadding 8 8
 set bargravity n
 set inputwidth 500
 
-definekey root x exec xtrlock -b
-definekey root c exec xterm -class UXTerm -title uxterm -u8 -fs 19
-definekey root s exec bash -c "xclip -o | xclip -sel c && ratpoison -c \"echo selection copied\""
-definekey root b exec bash -c "firefox $(xclip -o)"
+definekey top M-x exec xtrlock -b
+definekey top M-c exec xterm -class UXTerm -title uxterm -u8 -fs 19
+definekey top M-s exec bash -c "xclip -o | xclip -sel c && ratpoison -c \"echo selection copied\""
+definekey top M-b exec bash -c "firefox $(xclip -o)"
 definekey top M-1 prev
 definekey top M-2 next
-definekey root 3 nextscreen
-definekey root 4 exec ratpoison -c "swap 1"
-definekey top M-Tab next
-definekey root F2 exec
-definekey root BackSpace quit
-definekey root Print exec bash /home/alla/bin/screenshot.sh
+definekey top M-3 nextscreen
+definekey top M-4 swap 1
+definekey top M-Tab focusprev
+definekey top M-F2 exec
 
-definekey top XF86HomePage exec bash /home/alla/bin/heater.sh
+definekey top Print exec /home/alla/bin/screenshot.sh
+definekey top XF86HomePage exec /home/alla/bin/heater.sh
 definekey top XF86MonBrightnessDown exec /home/alla/bin/brightness.sh down
 definekey top XF86MonBrightnessUp exec /home/alla/bin/brightness.sh up
-definekey top Pause exec bash /home/alla/bin/mute.sh
-definekey top XF86AudioMute exec sh /home/alla/bin/mute.sh
-definekey top XF86Tools exec bash /home/alla/bin/mute.sh
-definekey top XF86AudioMedia exec bash /home/alla/bin/mute.sh
-definekey top XF86AudioLowerVolume exec sh /home/alla/bin/volume.sh down
-definekey top XF86AudioRaiseVolume exec sh /home/alla/bin/volume.sh up
+definekey top XF86AudioLowerVolume exec /home/alla/bin/volume.sh down
+definekey top XF86AudioRaiseVolume exec /home/alla/bin/volume.sh up
+definekey top Pause exec /home/alla/bin/mute.sh
+definekey top XF86AudioMute exec /home/alla/bin/mute.sh
+definekey top XF86Tools exec /home/alla/bin/mute.sh
+definekey top XF86AudioMedia exec /home/alla/bin/mute.sh
 
-exec rpws init 3 -a
-definekey root Left rpwsp
-definekey root Right rpwsn
+definekey top C-M-BackSpace quit
+definekey top C-M-Left rpwsp
+definekey top C-M-Right rpwsn
