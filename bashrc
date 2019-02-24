@@ -23,6 +23,7 @@ alias hh='ssh mint /home/alla/bin/heater.sh'
 alias grep='grep --exclude=*.pyc --exclude=*.swp --color=auto --exclude-dir=.terraform --exclude-dir=.git'
 alias sssh='ssh -q -o BatchMode=yes -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -t'
 alias chromium='command chromium --audio-buffer-size=2048'
+alias firefox='MOZ_USE_XINPUT2=1 command firefox > /dev/null 2>&1'
 
 export PATH=$PATH:/home/${USER}/bin:/home/${USER}/go/bin/
 export TERM=xterm-256color
@@ -66,6 +67,7 @@ function get_ps1() {
   local e=$?
   local latest_command="${prev_command}" # global
   prev_command="$(history 1)"
+
   # to avoid terminal wrapping issues colour escape sequences must be surrounded by \[ and \]
   local c_black="\[$(   tput setaf 0 )\]"
   local c_red="\[$(     tput setaf 1 )\]"
@@ -134,3 +136,12 @@ function vimg() {
 
 [ -f /etc/bash_completion ] && . /etc/bash_completion
 [ -f /home/alla/.bashrc.local ] && . /home/alla/.bashrc.local
+
+# pyenv override
+if [ -d /home/alla/.pyenv ]; then
+  export PYENV_ROOT="$HOME/.pyenv"
+  export PATH="$PYENV_ROOT/bin:$PATH"
+  if command -v pyenv 1>/dev/null 2>&1; then
+    eval "$(pyenv init -)"
+  fi
+fi
