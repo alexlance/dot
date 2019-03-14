@@ -119,7 +119,7 @@ au BufWritePre * :%s/\s\+$//e
 
 " lint python
 au BufWritePost *.py call Flake8()
-let g:flake8_cmd="python3.7 -m flake8"
+"let g:flake8_cmd="python3.7 -m flake8"
 
 " So that muttng temp files for composing email have syntax highlighting
 au BufNewFile,BufRead muttng-*-\w\+ setf mail
@@ -197,7 +197,7 @@ highlight WarningMsg ctermfg=white ctermbg=red guifg=White guibg=Red gui=None
 
 " list char
 highlight SpecialKey ctermfg=236
-highlight Comment ctermfg=238
+highlight Comment ctermfg=247
 highlight LineNr ctermfg=236
 
 "set number
