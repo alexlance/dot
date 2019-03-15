@@ -70,6 +70,8 @@ cmap Wq<CR> wq<CR>
 map Y y$
 map Q :q<CR>
 map W :w<CR>
+" open all folds
+noremap O maggvGzO`a
 
 map <C-d> :q!<CR>
 imap <C-d> <Esc>:q!<CR>

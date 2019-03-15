@@ -48,10 +48,6 @@ if [ -v SSH_AUTH_SOCK ] && [ -v SSH_CLIENT ] && [ -d ~/.ssh/sockets/ ]; then
   unset socket
 fi
 
-function awshell() {
-  timeout 10h aws-vault exec ${1:-production} --no-session -- bash -l
-}
-
 function mountcrypt() {
   echo "do something like this: "
   echo "cryptsetup open /dev/sdd1 disk --type plain --cipher aes-xts-plain64"
