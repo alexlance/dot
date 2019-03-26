@@ -121,7 +121,6 @@ au BufWritePre * :%s/\s\+$//e
 
 " lint python
 au BufWritePost *.py call Flake8()
-"let g:flake8_cmd="python3.7 -m flake8"
 
 " So that muttng temp files for composing email have syntax highlighting
 au BufNewFile,BufRead muttng-*-\w\+ setf mail
@@ -151,8 +150,8 @@ highlight SpellRare     ctermfg=Magenta     ctermbg=none
 endif
 
 " Tab settings
-nmap <C-t> :tabnew<CR>:e<space>
-imap <C-t> <Esc>:tabnew<CR>:e<space>
+nnoremap <C-t> :tabnew<CR>:e<space>
+inoremap <C-t> <Esc>:tabnew<CR>:e<space>
 nmap [1;2D :tabp<CR>
 nmap [1;2C :tabn<CR>
 imap [1;2D <Esc>:tabp<CR>
@@ -226,9 +225,11 @@ augroup END
 
 " compile and install go programs on save
 autocmd BufWritePost *.go :GoInstall
+let g:go_list_type = "quickfix"
+let g:go_fmt_command = "goimports"
 
 set hlsearch
-highlight Search ctermbg=15
+highlight Search ctermbg=6
 nnoremap <CR> :noh<CR><CR>
 
 au BufRead,BufNewFile *.tf setlocal filetype=terraform
@@ -251,3 +252,4 @@ endif
 " mz = make a mark, gg=G = format whole file, `z = move to first mark
 "filetype plugin indent on
 "autocmd BufWritePre *.sh normal mzgg=G`z
+set foldmethod=syntax
