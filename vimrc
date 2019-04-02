@@ -224,9 +224,10 @@ augroup CursorLineOnlyInActiveWindow
 augroup END
 
 " compile and install go programs on save
-autocmd BufWritePost *.go :GoInstall
+ autocmd BufWritePost *.go :normal zo
 let g:go_list_type = "quickfix"
 let g:go_fmt_command = "goimports"
+let g:go_def_mapping_enabled = 0
 
 set hlsearch
 highlight Search ctermbg=6
