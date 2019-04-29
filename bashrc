@@ -1,5 +1,5 @@
 
-shopt -q login_shell || return # if not running interactively, don't do anything
+shopt -q login_shell || return # only run .bashrc with login shells
 shopt -s checkwinsize # update the values of LINES and COLUMNS after each command
 shopt -s cdspell      # minor errors in the spelling of a directory component in a cd command will be corrected.
 shopt -s cmdhist      # save all lines of a multiple-line command in the same history entry
