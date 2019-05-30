@@ -24,7 +24,8 @@ set bs=2
 set sw=2
 set background=dark
 set backspace=indent,eol,start
-set laststatus=0
+set laststatus=2   " always display status line
+set statusline+=%F " add full path of file to status line
 set highlight=sb
 set t_kb=       " Nested screens change $TERM and render delete useles (ctrl-v + Backspace)
 set scrolloff=3
@@ -65,7 +66,7 @@ let mapleader=","
 cmap Q<CR> q<CR>
 cmap Q!<CR> q!<CR>
 cmap Q1<CR> q!<CR>
-cmap q1<CR> q!<CR>
+"cmap q1<CR> q!<CR>
 cmap Wq<CR> wq<CR>
 map Y y$
 map Q :q<CR>
@@ -177,7 +178,7 @@ map <C-g> <Esc>:Gstatus<CR>
 
 map <S-F5> :GitGutterToggle<cr>:set invnumber<cr>:set invrelativenumber<cr>
 
-cmap w!! w !sudo tee % >/dev/null
+"cmap w!! w !sudo tee % >/dev/null
 
 " yank into the system buffer
 "map Y :'<,'>w !xclip -i -sel c<CR><CR>
