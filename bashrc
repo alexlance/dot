@@ -98,12 +98,6 @@ function get_ps1() {
   PS1="${c_bold}${c_yellow}${auth}${c}${c_default}\u@\h${c} ${c_bold}${c_blue}\w${c}${c_green}${branch}${c} # "
 }
 
-function su() {
-  [ "${TMUX}" ] && tmux rename-window -t${TMUX_PANE} "#[fg=red]root"
-  command su "${@}"
-  [ "${TMUX}" ] && tmux rename-window -t${TMUX_PANE} "bash"
-}
-
 function cd() {
   command cd "${@}"
   export HERE="${PWD##*/}"
