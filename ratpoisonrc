@@ -33,3 +33,8 @@ definekey top XF86AudioMedia exec /home/alla/bin/mute.sh
 definekey top C-M-BackSpace quit
 definekey top C-M-Left rpwsp
 definekey top C-M-Right rpwsn
+
+# cd /usr/share/ratpoison/
+# gcc -o sloppy sloppy.c -lX11
+exec /usr/share/doc/ratpoison/examples/sloppy
+set framemsgwait -1
