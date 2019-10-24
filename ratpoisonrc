@@ -1,6 +1,5 @@
 escape C-space
 startup_message off
-exec rpws init 3 -a
 echo Welcome!
 
 set border 0
@@ -10,7 +9,6 @@ set inputwidth 500
 
 definekey top M-x exec xtrlock -b
 definekey top M-c exec xterm -class UXTerm -title uxterm -u8 -fs 19
-definekey top M-s exec bash -c "xclip -o | xclip -sel c && ratpoison -c \"echo selection copied\""
 definekey top M-b exec bash -c "firefox $(xclip -o)"
 definekey top M-1 prev
 definekey top M-2 next
@@ -34,7 +32,9 @@ definekey top C-M-BackSpace quit
 definekey top C-M-Left rpwsp
 definekey top C-M-Right rpwsn
 
-# cd /usr/share/ratpoison/
+# cd /usr/share/ratpoison/ or /usr/share/doc/ratpoison/examples
 # gcc -o sloppy sloppy.c -lX11
 exec /usr/share/doc/ratpoison/examples/sloppy
 set framemsgwait -1
+exec rpws init 3 -a
+exec xsetroot -cursor_name left_ptr # get rid of cross default cursor

@@ -15,5 +15,6 @@ xterm*on3Clicks: regex [^#\n]+
 xterm*cutNewLine: false
 xterm*cutToBeginningOfLine: false
 xterm*utf8: 1
+xterm*selectToClipboard: true
 Xcursor.theme: big-cursor
 *customization: -color
