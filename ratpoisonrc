@@ -36,5 +36,6 @@ definekey top C-M-Right rpwsn
 # gcc -o sloppy sloppy.c -lX11
 exec /usr/share/doc/ratpoison/examples/sloppy
 set framemsgwait -1
+set msgwait 1
 exec rpws init 3 -a
 exec xsetroot -cursor_name left_ptr # get rid of cross default cursor
