@@ -21,6 +21,7 @@ alias grep='grep --exclude=*.pyc --exclude=*.swp --color=auto --exclude-dir=.ter
 alias sssh='ssh -q -o BatchMode=yes -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -t'
 alias chromium='command chromium --audio-buffer-size=2048'
 alias firefox='MOZ_USE_XINPUT2=1 command firefox > /dev/null 2>&1'
+alias su='su -'
 
 export PATH=$PATH:/home/${USER}/bin:/home/${USER}/go/bin/
 export TERM=xterm-256color
