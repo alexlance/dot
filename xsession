@@ -18,6 +18,12 @@ if [ -x /usr/bin/synclient ]; then
   xrandr --output eDP-1 --mode "2400x1600"
 fi
 
+# enable middle click emulation (click both mouse buttons at once)
+# ps: fn+left click enables tap-to-click
+if xinput --list --id-only "pointer:Logitech K830" >/dev/null; then
+  xinput set-prop $(xinput --list --id-only "pointer:Logitech K830") "libinput Middle Emulation Enabled" 1
+fi
+
 killall ssh-agent || true
 ssh-agent -k || true
 
