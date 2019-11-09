@@ -4,7 +4,7 @@ install:
 	  [ $$i != "Makefile" ] && ln -sr $$i ~/.$$i; \
 	done
 	mkdir -p /home/alla/bin
-	git clone git@github.com:alexlance/paw /home/alla/bin/paw.git || cd (/home/alla/bin/paw.git && git pull)
+	git clone git@github.com:alexlance/paw /home/alla/bin/paw.git || (cd /home/alla/bin/paw.git && git pull)
 	cd /home/alla/bin/ && ln -sf paw.git/paw .
 
 uninstall:
