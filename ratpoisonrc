@@ -19,6 +19,7 @@ definekey top M-F2 exec
 
 definekey top Print exec /home/alla/bin/screenshot.sh
 definekey top XF86HomePage exec /home/alla/bin/heater.sh
+definekey top Scroll_Lock exec xdotool click 2
 definekey top XF86MonBrightnessDown exec /home/alla/bin/brightness.sh down
 definekey top XF86MonBrightnessUp exec /home/alla/bin/brightness.sh up
 definekey top XF86AudioLowerVolume exec /home/alla/bin/volume.sh down
