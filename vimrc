@@ -6,15 +6,11 @@ filetype on
 filetype plugin on
 
 hi clear
-if exists("syntax_on")
-  syntax reset
-endi
+syntax reset
 syntax on
-
 set mouse=
 set encoding=utf-8
 set hlsearch
-set nohidden " close tab closes buffer
 set expandtab
 set softtabstop=2
 set tabstop=2
@@ -50,9 +46,9 @@ set ff=unix
 set ttyfast
 set foldmethod=indent
 set foldnestmax=1
-set showtabline=2
-set tabpagemax=500
-set tabline=
+"set showtabline=2
+"set tabpagemax=500
+"set tabline=
 set copyindent
 set backup
 set backupdir=/home/alla/.vim/tmp/
@@ -151,12 +147,24 @@ highlight SpellRare     ctermfg=Magenta     ctermbg=none
 endif
 
 " Tab settings
-nnoremap <C-t> :tabnew<CR>:e<space>
-inoremap <C-t> <Esc>:tabnew<CR>:e<space>
-nmap [1;2D :tabp<CR>
-nmap [1;2C :tabn<CR>
-imap [1;2D <Esc>:tabp<CR>
-imap [1;2C <Esc>:tabn<CR>
+"nnoremap <C-t> :tabnew<CR>:e<space>
+"inoremap <C-t> <Esc>:tabnew<CR>:e<space>
+"nmap [1;2D :tabp<CR>
+"nmap [1;2C :tabn<CR>
+"imap [1;2D <Esc>:tabp<CR>
+"imap [1;2C <Esc>:tabn<CR>
+
+" cd ~/.vim/bundle && git clone https://github.com/ap/vim-buftabline.git
+let g:buftabline_indicators = 1
+nnoremap <C-t> :enew<CR>:e<space>
+inoremap <C-t> <Esc>:enew<CR>:e<space>
+nmap [1;2D :bprev<CR>
+nmap [1;2C :bnext<CR>
+imap [1;2D <Esc>:bprev<CR>
+imap [1;2C <Esc>:bnext<CR>
+
+"cnoremap q<CR> :bdel<CR>
+"inoremap q <Esc>:bdel<CR>
 
 " Format a whole paragraph nicely
 nmap gb i!gb!<esc>gqip?!gb!<cr>df!
