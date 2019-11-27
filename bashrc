@@ -105,7 +105,7 @@ function cd() {
 }
 
 function vimg() {
-  vim -p $(grep -rsil "${@}" *)
+  vim $(grep -rsil "${@}" *)
 }
 
 #function cd() {
