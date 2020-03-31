@@ -232,6 +232,12 @@ augroup CursorLineOnlyInActiveWindow
   autocmd WinLeave * setlocal nocursorline
 augroup END
 
+" switching tabs, leave cursor/buffer in same place
+if v:version >= 700
+  au BufLeave * let b:winview = winsaveview()
+  au BufEnter * if(exists('b:winview')) | call winrestview(b:winview) | endif
+endif
+
 " compile and install go programs on save
 "autocmd BufWritePost *.go :normal zo
 let g:go_list_type = "quickfix"
