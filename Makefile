@@ -1,4 +1,4 @@
-EXCLUDES := Makefile .git
+EXCLUDES := Makefile README.md .git
 DOTFILES := $(filter-out $(EXCLUDES), $(wildcard *))
 DEST := ~
 
