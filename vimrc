@@ -22,6 +22,7 @@ set background=dark
 set backspace=indent,eol,start
 set laststatus=2   " always display status line
 set statusline+=%F " add full path of file to status line
+set t_ti= t_te=    " don't clear screen after exit
 set highlight=sb
 set t_kb=       " Nested screens change $TERM and render delete useles (ctrl-v + Backspace)
 set scrolloff=3
