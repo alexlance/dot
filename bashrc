@@ -22,6 +22,7 @@ alias sssh='ssh -q -o BatchMode=yes -o UserKnownHostsFile=/dev/null -o StrictHos
 alias chromium='command chromium --audio-buffer-size=2048'
 alias firefox='MOZ_USE_XINPUT2=1 command firefox > /dev/null 2>&1'
 alias su='command su - -c "cd $(pwd); bash"'
+alias ref='eval $(tmux showenv -s)'
 
 export PATH=$PATH:/home/${USER}/bin:/home/${USER}/go/bin/
 export TERM=xterm-256color
@@ -36,15 +37,6 @@ export HISTFILESIZE=2000
 export HISTTIMEFORMAT='%F %T '
 
 
-# store the current ssh socket if any, into a file
-if [ -v SSH_AUTH_SOCK ] && [ -v SSH_CLIENT ] && [ -d ~/.ssh/sockets/ ]; then
-  socket="/home/alla/.ssh/sockets/${SSH_CLIENT%% *}.sock"
-  if [ ! -f ${socket} ] || [ "${SSH_AUTH_SOCK}" != "$(cat ${socket})" ]; then
-    echo "${SSH_AUTH_SOCK}" > ${socket}
-    echo "updated: ${socket}"
-  fi
-  unset socket
-fi
 
 function mountcrypt() {
   echo "do something like this: "
