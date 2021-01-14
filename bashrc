@@ -22,7 +22,6 @@ alias sssh='ssh -q -o BatchMode=yes -o UserKnownHostsFile=/dev/null -o StrictHos
 alias chromium='command chromium --audio-buffer-size=2048'
 alias firefox='MOZ_USE_XINPUT2=1 command firefox > /dev/null 2>&1'
 alias su='command su - -c "cd $(pwd); bash"'
-alias ref='eval $(tmux showenv -s)'
 
 export PATH=$PATH:/home/${USER}/bin:/home/${USER}/go/bin/
 export TERM=xterm-256color
@@ -70,6 +69,11 @@ function get_ps1() {
   local c_default=${c_white}
   [ "$e" != 0 ] && [ "${latest_command}" != "${prev_command}" ] && c_default="${c_red}"
 
+  # import parent variables into current tmux session
+  if [ -n "${TMUX}" ]; then
+    eval "$(tmux showenv -s)"
+  fi
+
   # change prompt color if AWS auth is set
   [ -v AWS_SECRET_ACCESS_KEY ] && c_default="${c_magenta}"
 
@@ -79,9 +83,6 @@ function get_ps1() {
   # add git branch name into prompt
   local branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null);
   [ "${branch}" ] && branch=" (${branch})"
-
-  # re-obtain an ssh-agent socket for tmux
-  [ -f /home/alla/.ssh/sockets/${SSH_CLIENT%% *}.sock ] && export SSH_AUTH_SOCK=$(cat /home/alla/.ssh/sockets/${SSH_CLIENT%% *}.sock)
 
   # print a smiley for every ssh key added to my ssh-agent
   local numkeys=$(ssh-add -l 2>/dev/null | grep -v 'The agent has no identities' | wc -l)
