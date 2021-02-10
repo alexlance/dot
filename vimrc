@@ -52,8 +52,8 @@ set foldnestmax=1
 "set tabline=
 set copyindent
 set backup
-set backupdir=/home/alla/.vim/tmp/
-set dir=/home/alla/.vim/tmp/
+set backupdir=~alla/.vim/tmp/
+set dir=~alla/.vim/tmp/
 
 silent! colorscheme hybrid_material
 
@@ -194,7 +194,7 @@ map <S-F5> :GitGutterToggle<cr>:set invnumber<cr>:set invrelativenumber<cr>
 nnoremap Y y$
 
 " permanent undo history of files
-let s:undoDir = "/home/alla/.vim/undo"
+let s:undoDir = "~alla/.vim/undo"
 let &undodir=s:undoDir
 set undofile
 

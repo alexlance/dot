@@ -23,10 +23,10 @@ alias chromium='command chromium --audio-buffer-size=2048'
 alias firefox='MOZ_USE_XINPUT2=1 command firefox > /dev/null 2>&1'
 alias su='command su - -c "cd $(pwd); bash"'
 
-export PATH=$PATH:/home/${USER}/bin:/home/${USER}/go/bin/
+export PATH=$PATH:${HOME}/bin:${HOME}/go/bin/
 export TERM=xterm-256color
 export EDITOR=vim
-export GOPATH=$HOME/go
+export GOPATH=${HOME}/go
 export GPG_TTY=$(tty)   # for ~/.vim/plugin/gnupg.vim
 export LANG=en_AU.utf8  # fix utf-8 in mutt's email reader
 export AWS_REGIONS="ap-southeast-2 us-west-2"
@@ -116,11 +116,11 @@ function vimg() {
 #}
 
 [ -f /etc/bash_completion ] && . /etc/bash_completion
-[ -f /home/alla/.bashrc.local ] && . /home/alla/.bashrc.local
+[ -f /${HOME}/.bashrc.local ] && . /${HOME}/.bashrc.local
 
 # pyenv override
-if [ -d /home/alla/.pyenv ]; then
-  export PYENV_ROOT="$HOME/.pyenv"
+if [ -d /${HOME}/.pyenv ]; then
+  export PYENV_ROOT="${HOME}/.pyenv"
   export PATH="$PYENV_ROOT/bin:$PATH"
   if command -v pyenv 1>/dev/null 2>&1; then
     eval "$(pyenv init -)"
