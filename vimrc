@@ -92,6 +92,7 @@ nnoremap K <nop>
 nnoremap ; :
 map <C-P> gqip
 map <C-J> <Esc>:%!python -m json.tool<CR>
+nnoremap J gJ
 
 
 " omni autocompletions per-language
