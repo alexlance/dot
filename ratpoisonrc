@@ -40,3 +40,5 @@ set framemsgwait -1
 set msgwait 1
 exec rpws init 3 -a
 exec xsetroot -cursor_name left_ptr # get rid of cross default cursor
+exec xsetroot -bg black             # black bg
+exec hsetroot -solid "#000000"      # black bg (if using compton)

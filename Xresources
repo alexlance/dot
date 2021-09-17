@@ -17,4 +17,6 @@ xterm*cutToBeginningOfLine: false
 xterm*utf8: 1
 xterm*selectToClipboard: true
 Xcursor.theme: big-cursor
+! xterm*CursorColor: rgb:0/200/0
+xterm*cursorColor: *XtDefaultForeground
 *customization: -color

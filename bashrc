@@ -26,7 +26,13 @@ alias su='command su - -c "cd $(pwd); bash"'
 export PATH=$PATH:${HOME}/bin:${HOME}/go/bin/
 export TERM=xterm-256color
 export EDITOR=vim
+<<<<<<< Updated upstream
 export GOPATH=${HOME}/go
+#export PS4='+(${BASH_SOURCE}:${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
+=======
+#export PS4='+(${BASH_SOURCE}:${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
+export GOPATH=$HOME/go
+>>>>>>> Stashed changes
 export GPG_TTY=$(tty)   # for ~/.vim/plugin/gnupg.vim
 export LANG=en_AU.utf8  # fix utf-8 in mutt's email reader
 export AWS_REGIONS="ap-southeast-2 us-west-2"

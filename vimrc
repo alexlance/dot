@@ -1,5 +1,4 @@
 set nocompatible        " must be the first line
-execute pathogen#infect()
 
 set viminfo+=n~/.vim/viminfo
 filetype on
@@ -52,10 +51,11 @@ set foldnestmax=1
 "set tabline=
 set copyindent
 set backup
-set backupdir=~alla/.vim/tmp/
-set dir=~alla/.vim/tmp/
+set backupdir=~/.vim/tmp/
+set dir=~/.vim/tmp/
 
 silent! colorscheme hybrid_material
+set virtualedit=block
 
 let mapleader=","
 
@@ -96,18 +96,9 @@ nnoremap J gJ
 
 
 " omni autocompletions per-language
-autocmd FileType python set omnifunc=pythoncomplete#Complete
-autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
-autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 autocmd FileType go setlocal sts=2 ts=2 sw=2 tabstop=2 noexpandtab nospell
 autocmd FileType php setlocal sts=2 ts=2 sw=2 tabstop=2 expandtab nospell
 autocmd FileType python setlocal sts=2 ts=2 sw=2 tabstop=2 expandtab nospell
-autocmd BufRead,BufNewFile *.screenplay    set filetype=screenplay
-autocmd BufWritePost */alloc/javascript/*.js :silent !(make cache > /dev/null)
-autocmd BufWritePost */alloc/css/src/* :silent       !(make css > /dev/null)
 
 " Disable the loading of hilighted matching parenthesis
 let loaded_matchparen = 1
@@ -118,12 +109,6 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 " nuke all trailing space before a write
 au BufWritePre * :%s/\s\+$//e
 
-" lint python
-au BufWritePost *.py call Flake8()
-
-" So that muttng temp files for composing email have syntax highlighting
-au BufNewFile,BufRead muttng-*-\w\+ setf mail
-
 " for long lines
 noremap j gj
 noremap k gk
@@ -133,12 +118,7 @@ vmap <BS> x
 "This changes the behavior of the . command to leave the cursor at the point where it was before editing started
 nmap . .`[
 nnoremap ; :
-"map <C-J> <Esc>:%!python -m json.tool<CR>
-map <C-j> <Esc>:% !jq '.'<CR>
 
-abbreviate definately definitely
-abbreviate oppurtunity opportunity
-abbreviate alot a lot
 nmap gb i!gb!<esc>gqip?!gb!<cr>df!
 
 if (v:version >= 700)
@@ -148,15 +128,6 @@ highlight SpellLocal    ctermfg=Magenta     ctermbg=none
 highlight SpellRare     ctermfg=Magenta     ctermbg=none
 endif
 
-" Tab settings
-"nnoremap <C-t> :tabnew<CR>:e<space>
-"inoremap <C-t> <Esc>:tabnew<CR>:e<space>
-"nmap [1;2D :tabp<CR>
-"nmap [1;2C :tabn<CR>
-"imap [1;2D <Esc>:tabp<CR>
-"imap [1;2C <Esc>:tabn<CR>
-
-" cd ~/.vim/bundle && git clone https://github.com/ap/vim-buftabline.git
 let g:buftabline_indicators = 1
 nnoremap <C-t> :enew<CR>:e<space>
 inoremap <C-t> <Esc>:enew<CR>:e<space>
@@ -164,9 +135,6 @@ nmap [1;2D :bprev<CR>
 nmap [1;2C :bnext<CR>
 imap [1;2D <Esc>:bprev<CR>
 imap [1;2C <Esc>:bnext<CR>
-
-"cnoremap q<CR> :bdel<CR>
-"inoremap q <Esc>:bdel<CR>
 
 " Format a whole paragraph nicely
 nmap gb i!gb!<esc>gqip?!gb!<cr>df!
@@ -184,18 +152,11 @@ map <S-F8> <Esc>:cp<CR>
 " size of preview window, eg git status
 set previewheight=25
 map <C-g> <Esc>:Gstatus<CR>
-"map <C-G> :Dispatch! git stash ; git pull --rebase ; git push ; git stash pop<CR>
 
-map <S-F5> :GitGutterToggle<cr>:set invnumber<cr>:set invrelativenumber<cr>
-
-"cmap w!! w !sudo tee % >/dev/null
-
-" yank into the system buffer
-"map Y :'<,'>w !xclip -i -sel c<CR><CR>
 nnoremap Y y$
 
 " permanent undo history of files
-let s:undoDir = "~alla/.vim/undo"
+let s:undoDir = "~/.vim/undo"
 let &undodir=s:undoDir
 set undofile
 
@@ -272,3 +233,21 @@ endif
 "filetype plugin indent on
 "autocmd BufWritePre *.sh normal mzgg=G`z
 set foldmethod=syntax
+
+
+
+set formatlistpat=^\\s*                     " Optional leading whitespace
+set formatlistpat+=[                        " Start character class
+set formatlistpat+=\\[({]\\?                " |  Optionally match opening punctuation
+set formatlistpat+=\\(                      " |  Start group
+set formatlistpat+=[0-9]\\+                 " |  |  Numbers
+set formatlistpat+=\\\|                     " |  |  or
+set formatlistpat+=[a-zA-Z]\\+              " |  |  Letters
+set formatlistpat+=\\)                      " |  End group
+set formatlistpat+=[\\]:.)}                 " |  Closing punctuation
+set formatlistpat+=]                        " End character class
+set formatlistpat+=\\s\\+                   " One or more spaces
+set formatlistpat+=\\\|                     " or
+set formatlistpat+=^\\s*[-–+o*•]\\s\\+      " Bullet points
+
+

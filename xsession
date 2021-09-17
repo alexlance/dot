@@ -12,6 +12,7 @@ if [ -x /usr/bin/synclient ]; then
   synclient PalmDetect=1             # prevent palm grazing the touchpad
   synclient PalmMinWidth=40          # how wide is a palm
   synclient HorizTwoFingerScroll=1   # scroll sideways with two fingers
+  synclient AccelFactor=0.7          # FASTER MOUSE
 
   xrandr --newmode "2400x1600" 326.00  2400 2584 2840 3280  1600 1603 1613 1658 -hsync +vsync
   xrandr --addmode eDP-1 "2400x1600"
@@ -28,6 +29,8 @@ fi
 killall ssh-agent || true
 ssh-agent -k || true
 
-#xautolock -time ${X_LOCK_TIME:-10} -locker xtrlock -secure &
+xautolock -time ${X_LOCK_TIME:-10} -locker xtrlock -secure &
 xset -dpms
-exec ssh-agent -t 10h ratpoison
+xset s off
+compton --backend glx --paint-on-overlay --vsync opengl-swc --daemon
+exec ssh-agent -t 12h ratpoison
