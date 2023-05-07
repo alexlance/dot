@@ -129,8 +129,8 @@ highlight SpellRare     ctermfg=Magenta     ctermbg=none
 endif
 
 let g:buftabline_indicators = 1
-nnoremap <C-t> :enew<CR>:e<space>
-inoremap <C-t> <Esc>:enew<CR>:e<space>
+nnoremap <C-t> :enew<CR>:n<space>
+inoremap <C-t> <Esc>:enew<CR>:n<space>
 nmap [1;2D :bprev<CR>
 nmap [1;2C :bnext<CR>
 imap [1;2D <Esc>:bprev<CR>

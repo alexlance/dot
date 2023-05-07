@@ -102,6 +102,34 @@ function vimg() {
   vim $(grep -rsil "${@}" *)
 }
 
+function play() {
+  if [ -d "${@}" ] || [ -f "${@}" ]; then
+    echo "$(date '+%F %T') ${@}" >> ~/.smplayer_history
+    /usr/bin/smplayer "${@}"
+  else
+    (
+    cd /home/alla/Download
+    tput sgr0
+    tput setaf 2  # green
+    echo -e "Previously: $(grep -rsi "${@}" ~/.smplayer_history | tail -n1)\n"
+    tput sgr0
+    OLDIFS=$IFS
+    IFS=''
+    readarray -d '' files < <(find . -type f -iname "*${@}*" -print0 | grep -zZvE '(\.nfo$|\.torrent$)' | sort -z)
+    IFS=$OLDIFS
+    select file in "${files[@]}"; do
+      if [[ -n "$file" ]]; then
+        echo "$(date '+%F %T') ${file}" >> ~/.smplayer_history
+        /usr/bin/smplayer "$file"
+        break
+      else
+        echo "choose again"
+      fi
+    done
+    )
+  fi
+}
+
 #function cd() {
 #  # cd $dir
 #  # cd [-1]
