@@ -111,14 +111,16 @@ function play() {
     cd /home/alla/Download
     tput sgr0
     tput setaf 2  # green
-    echo -e "Previously: $(grep -rsi "${@}" ~/.smplayer_history | tail -n1)\n"
+    local p=$(grep -rsi "${@//\*/.\*}" ~/.smplayer_history | tail -n1) || true
+    [ "${p}" ] && echo -e "\nPreviously:\n$(basename "${p}")\n"
     tput sgr0
     OLDIFS=$IFS
     IFS=''
-    readarray -d '' files < <(find . -type f -iname "*${@}*" -print0 | grep -zZvE '(\.nfo$|\.torrent$)' | sort -z)
+    readarray -d '' files < <(find . -type f -iname "*${@}*" -printf "%f\0" | grep -zZvE '(\.nfo$|\.torrent$|\.srt$|\.idx$|\.sub$)' | sort -z)
     IFS=$OLDIFS
     select file in "${files[@]}"; do
       if [[ -n "$file" ]]; then
+        file="$(find . -type f -name "${file}")"
         echo "$(date '+%F %T') ${file}" >> ~/.smplayer_history
         /usr/bin/smplayer "$file"
         break
