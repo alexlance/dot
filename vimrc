@@ -1,4 +1,5 @@
 set nocompatible        " must be the first line
+execute pathogen#infect()
 
 set viminfo+=n~/.vim/viminfo
 filetype on
@@ -7,6 +8,7 @@ filetype plugin on
 hi clear
 syntax reset
 syntax on
+set path+=**
 set mouse=
 set encoding=utf-8
 set hlsearch
@@ -43,7 +45,6 @@ set shiftround        " round to 'shiftwidth' for "<<" and ">>"
 set iskeyword+=-      " make cw consider the dash character as a normal word char
 set shortmess+=A      " get rid of 'a swap file already exists' messages
 set ff=unix
-set ttyfast
 set foldmethod=indent
 set foldnestmax=1
 "set showtabline=2
@@ -129,6 +130,7 @@ highlight SpellRare     ctermfg=Magenta     ctermbg=none
 endif
 
 let g:buftabline_indicators = 1
+let g:buftabline_show = 2
 nnoremap <C-t> :enew<CR>:n<space>
 inoremap <C-t> <Esc>:enew<CR>:n<space>
 nmap [1;2D :bprev<CR>

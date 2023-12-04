@@ -27,3 +27,7 @@ $(DOTFILES):
 
 bin:
 	git clone git@github.com:alexlance/util ~/bin
+
+paw:
+	git clone git@github.com:alexlance/paw ~/bin/paw.repo
+	cd ~/bin/ && ln -s paw.repo/paw ./paw
