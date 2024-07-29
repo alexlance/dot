@@ -8,7 +8,7 @@ filetype plugin on
 hi clear
 syntax reset
 syntax on
-set path+=**
+set path+=** " TALK
 set mouse=
 set encoding=utf-8
 set hlsearch
@@ -23,7 +23,7 @@ set background=dark
 set backspace=indent,eol,start
 set laststatus=2   " always display status line
 set statusline+=%F " add full path of file to status line
-set t_ti= t_te=    " don't clear screen after exit
+" set t_ti= t_te=    " don't clear screen after exit
 set highlight=sb
 set t_kb=       " Nested screens change $TERM and render delete useles (ctrl-v + Backspace)
 set scrolloff=3
@@ -35,7 +35,7 @@ set ttymouse=xterm2 " mouse support
 set ttyfast
 set wildmode=longest,list,full
 set wildmenu
-set confirm
+" set confirm  (does this change the exit setting when editing multiple files?)
 set noautochdir
 set bg=dark
 set grepprg=grep\ -rsin\ $*\ *
@@ -69,6 +69,7 @@ cmap Wq<CR> wq<CR>
 map Y y$
 map Q :q<CR>
 map W :w<CR>
+cmap q<CR> qa<CR>
 " open all folds
 noremap O maggvGzO`a
 
@@ -93,7 +94,7 @@ nnoremap K <nop>
 nnoremap ; :
 map <C-P> gqip
 map <C-J> <Esc>:%!python -m json.tool<CR>
-nnoremap J gJ
+" nnoremap J gJ
 
 
 " omni autocompletions per-language
@@ -177,9 +178,12 @@ highlight LineNr ctermfg=236
 
 "set number
 "set relativenumber
-set cursorline
-highlight cursorline cterm=none ctermbg=232
-highlight cursorlinenr ctermfg=130
+"set cursorline
+highlight cursorline cterm=none ctermbg=236
+highlight clear CursorLineNR
+highlight cursorlinenr ctermfg=208
+
+" the little cursor colour
 
 " better lines to delineate windows
 hi VertSplit   ctermbg=NONE cterm=NONE
