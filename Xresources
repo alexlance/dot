@@ -2,7 +2,7 @@
 xterm*background:	rgb:0/0/0
 xterm*foreground:	Grey
 xterm*faceName:	DejaVu Sans Mono
-xterm*faceSize: 11
+xterm*faceSize: 14
 xterm*scrollTtyOutput: False
 xterm*cursorBlink: False
 xterm*saveLines: 10000

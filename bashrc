@@ -6,9 +6,11 @@ shopt -s cmdhist      # save all lines of a multiple-line command in the same hi
 shopt -u execfail     # exec process should kill the shell when it exits
 shopt -s histappend   # append to history file, don't overwrite it
 
+export MORE="-e"
 alias l='ls -lah --color=auto'
-alias lm='ls -lah --color=always | more'
-alias m='more'
+alias lm='ls -lah --color=always | more -e'
+alias lt='ls -lath --color=always | more -e'
+alias m='more -e'
 alias ..='cd ..'
 alias ifconfig='/sbin/ifconfig'
 alias s='du -sh * .??* | sort -h | less -S -E -F -R -X'
@@ -116,18 +118,69 @@ function play() {
     tput sgr0
     OLDIFS=$IFS
     IFS=''
-    readarray -d '' files < <(find . -type f -iname "*${@}*" -printf "%f\0" | grep -zZvE '(\.nfo$|\.torrent$|\.srt$|\.idx$|\.sub$)' | sort -z)
+    readarray -d '' files < <(find . -type f -iname "*${@}*" -printf "%f\0" | grep -zZvE '(\.nfo$|\.torrent$|\.srt$|\.idx$|\.png$|\.sub$)' | sort -z)
     IFS=$OLDIFS
-    select file in "${files[@]}"; do
-      if [[ -n "$file" ]]; then
-        file="$(find . -type f -name "${file}")"
+
+    # for long lists, just grab the previous and next 10 entries
+    if [ ${#files[@]} -gt 21 ]; then
+      ep=-1
+      for i in "${!files[@]}"; do
+        if [[ "${files[$i]}" == *"$(basename "${p}")"* ]]; then
+          ep=$i
+        fi
+      done
+
+      start=$((ep - 10))
+      end=$((ep + 10))
+      start=$((start < 0 ? 0 : start))
+      end=$((end >= ${#files[@]} ? ${#files[@]} - 1 : end))
+      length=$((end - start + 1))
+      # Create the new array with bounds
+      files=("${files[@]:$start:$length}")
+    fi
+
+    # decorate the next episode by making it orange
+    prefix="$(tput sgr0)$(tput setaf 208)"  # 208 == orange
+    suffix="$(tput sgr0)"
+    donext=0
+    for i in "${!files[@]}"; do
+      if [ "${donext}" == 1 ]; then
+        echo "$((i+1))) ${prefix}${files[$i]}${suffix}"
+        default=$((i+1))
+        donext=0
+      elif [[ "${files[$i]}" == *"$(basename "${p}")"* ]]; then
+        echo "$((i+1))) ${files[i]}"
+        donext=1
+      else
+        echo "$((i+1))) ${files[i]}"
+      fi
+    done
+
+    read -p "Play [default=$default]: " fileno
+
+    # select as default the next episode
+    if [[ -z "$fileno" ]] ; then
+      fileno=$default
+    fi
+
+    if [ ! -z "${files[$((fileno - 1))]}" ]; then
+      file=${files[$((fileno - 1))]}
+      file="${file#$prefix}"  # strip colour chars
+      file="${file%$suffix}"  # strip end colour chars
+      file="${file//[/\\[}"  # find doesn't like square brackets in file name search
+      file="${file//]/\\]}"
+      file="$(find . -type f -name "${file}")"
+      if [ -f "${file}" ]; then
         echo "$(date '+%F %T') ${file}" >> ~/.smplayer_history
         /usr/bin/smplayer "$file"
         break
       else
         echo "choose again"
       fi
-    done
+    else
+      echo "error"
+    fi
+
     )
   fi
 }

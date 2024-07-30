@@ -45,6 +45,7 @@ set shiftround        " round to 'shiftwidth' for "<<" and ">>"
 set iskeyword+=-      " make cw consider the dash character as a normal word char
 set shortmess+=A      " get rid of 'a swap file already exists' messages
 set ff=unix
+set ttyfast
 set foldmethod=indent
 set foldnestmax=1
 "set showtabline=2
@@ -94,13 +95,16 @@ nnoremap K <nop>
 nnoremap ; :
 map <C-P> gqip
 map <C-J> <Esc>:%!python -m json.tool<CR>
-" nnoremap J gJ
+nnoremap J gJ
 
 
 " omni autocompletions per-language
 autocmd FileType go setlocal sts=2 ts=2 sw=2 tabstop=2 noexpandtab nospell
 autocmd FileType php setlocal sts=2 ts=2 sw=2 tabstop=2 expandtab nospell
 autocmd FileType python setlocal sts=2 ts=2 sw=2 tabstop=2 expandtab nospell
+
+autocmd BufWritePost *.py call flake8#Flake8()
+
 
 " Disable the loading of hilighted matching parenthesis
 let loaded_matchparen = 1

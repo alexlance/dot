@@ -3,12 +3,14 @@ startup_message off
 echo Welcome!
 
 set border 0
+# note: just run this manually if it doesn't work: ctrl-space  colon  set padding 50 50 0 0
+set padding 50 50 50 0  # add a bunch of padding on the left side of the screen, because projector is image shifted left A LOT
 set barpadding 8 8
 set bargravity n
 set inputwidth 500
 
 definekey top M-x exec xtrlock -b
-definekey top M-c exec xterm -class UXTerm -title uxterm -u8 -fs 19
+definekey top M-c exec xterm -class UXTerm -title uxterm -u8
 definekey top M-b exec bash -c "firefox $(xclip -selection clipboard -o)"
 definekey top M-1 prev
 definekey top M-2 next
@@ -19,7 +21,7 @@ definekey top M-F2 exec
 
 definekey top Print exec /home/alla/bin/screenshot.sh
 definekey top XF86HomePage exec /home/alla/bin/heater.sh
-definekey top Scroll_Lock exec xdotool click 2
+definekey top Alt_R exec xdotool click 2
 definekey top XF86MonBrightnessDown exec /home/alla/bin/brightness.sh down
 definekey top XF86MonBrightnessUp exec /home/alla/bin/brightness.sh up
 definekey top XF86AudioLowerVolume exec /home/alla/bin/volume.sh down

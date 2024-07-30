@@ -39,3 +39,12 @@
 
 [branch]
     autosetuprebase = always
+
+[commit]
+  verbose = true
+
+[diff]
+  algorithm = "histogram"
+
+[log]
+  date = "iso"

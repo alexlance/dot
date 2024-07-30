@@ -26,11 +26,21 @@ if xinput --list --id-only "pointer:Logitech K830" >/dev/null; then
   xinput set-prop $(xinput --list --id-only "pointer:Logitech K830") "libinput Middle Emulation Enabled" 1
 fi
 
-killall ssh-agent || true
-ssh-agent -k || true
+# killall ssh-agent || true
+# ssh-agent -k || true
 
-xautolock -time ${X_LOCK_TIME:-10} -locker xtrlock -secure &
+# enable HCDP, so you can watch fucking tv content (eg 7plus.com.au) and other HDCP "protected" shit
+# xrandr --output "DP-1" --set "Content Protection" "Enabled"
+# xrandr --output "DP-1" --set "HDCP Content Type" "HDCP Type1"
+
+
+
+# xautolock -time ${X_LOCK_TIME:-10} -locker xtrlock -secure &
 xset -dpms
 xset s off
-compton --backend glx --paint-on-overlay --vsync opengl-swc --daemon
+xset r rate 200 40
+#compton --backend glx --paint-on-overlay --vsync opengl-swc --daemon
+#compton --backend glx --paint-on-overlay --daemon
+#compton --daemon
+compton --backend glx --paint-on-overlay --vsync opengl-swc &   # ALEX REMOVE THIS IF RATP DOESN"T START RIGHT - bbut you will get tearing when watching video/kayo
 exec ssh-agent -t 12h ratpoison
