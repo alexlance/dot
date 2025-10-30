@@ -25,7 +25,17 @@ alias chromium='command chromium --audio-buffer-size=2048'
 alias firefox='MOZ_USE_XINPUT2=1 command firefox > /dev/null 2>&1'
 alias su='command su - -c "cd $(pwd); bash"'
 
+alias fang='echo sshfs \
+  -o allow_root \
+  -o ServerAliveInterval=15,ServerAliveCountMax=3 \
+  -o reconnect \
+  -o kernel_cache \
+  -o compression=no \
+  frog.lan:/mnt/nas/fang /fang'
+
+
 export PATH=$PATH:${HOME}/bin:${HOME}/go/bin/
+export PATH=/home/alla/python_venv/bin/:${PATH} # for python venv
 export TERM=xterm-256color
 export EDITOR=vim
 export GOPATH=${HOME}/go
@@ -210,3 +220,15 @@ if [ -d /${HOME}/.pyenv ]; then
     eval "$(pyenv init -)"
   fi
 fi
+
+function zoom() {
+  echo "running: firejail zoom"
+  command firejail --private=~/zoom-sandbox \
+    --whitelist=~/zoom-sandbox/.config/zoom \
+    --whitelist=~/zoom-sandbox/.config/zoomus.conf \
+    --whitelist=~/zoom-sandbox/.zoom \
+    --whitelist=~/zoom-sandbox/.cache/zoom \
+    zoom
+}
+
+
