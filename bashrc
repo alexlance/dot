@@ -175,6 +175,7 @@ function play() {
       if [ -f "${file}" ]; then
         echo "$(date '+%F %T') ${file}" >> ~/.smplayer_history
         vlc "${file}" || smplayer "$file"
+        pulsemixer --set-volume 20  # reset volume to low
       else
         echo "choose again"
       fi

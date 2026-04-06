@@ -132,6 +132,22 @@ autocmd FileType python setlocal sts=2 ts=2 sw=2 tabstop=2 expandtab nospell
 
 autocmd BufWritePost *.py call flake8#Flake8()
 
+" update blog after a write
+augroup BlogProject
+    autocmd!
+    " ensure pwd is correct for make
+    autocmd BufEnter /home/alla/aws/alexlance/blog/* lcd /home/alla/aws/alexlance/blog
+    " re-generate html files whenever something changes in src/ folder
+    autocmd BufWritePost /home/alla/aws/alexlance/blog/src/* silent! make all >/dev/null | redraw!
+augroup END
+
+augroup ResumeProject
+    autocmd!
+    " ensure pwd is correct for make
+    autocmd BufEnter /home/alla/resume/* lcd /home/alla/resume
+    autocmd BufWritePost /home/alla/resume/* silent! make resume.pdf >/dev/null | redraw!
+augroup END
+
 
 " Disable the loading of hilighted matching parenthesis
 let loaded_matchparen = 1
