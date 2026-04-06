@@ -26,14 +26,6 @@ alias chromium='command chromium --audio-buffer-size=2048'
 alias firefox='MOZ_USE_XINPUT2=1 command firefox > /dev/null 2>&1'
 alias su='command su - -c "cd $(pwd); bash"'
 
-alias fang='echo sshfs \
-  -o allow_root \
-  -o ServerAliveInterval=15,ServerAliveCountMax=3 \
-  -o reconnect \
-  -o kernel_cache \
-  -o compression=no \
-  frog.lan:/mnt/nas/fang /fang'
-
 alias vnc='x11vnc -noxfixes -display :0'
 
 export PATH=$PATH:${HOME}/bin:${HOME}/go/bin/
@@ -49,21 +41,6 @@ export HISTCONTROL="ignoredups"
 export HISTSIZE=1000
 export HISTFILESIZE=2000
 export HISTTIMEFORMAT='%F %T '
-
-# alias fang='echo sshfs \
-#   -o allow_root \
-#   -o ServerAliveInterval=15,ServerAliveCountMax=3 \
-#   -o reconnect \
-#   -o kernel_cache \
-#   -o compression=no \
-#   frog.lan:/mnt/nas/fang /fang'
-
-  #-o Ciphers=arcfour \
-  #-o cache=yes \
-  #-o cache_timeout=600 \
-  #-o attr_timeout=600 \
-  #-o entry_timeout=600 \
-  #-o negative_timeout=600 \
 
 function mountcrypt() {
   echo "do something like this: "
@@ -226,13 +203,22 @@ function play() {
 [ -f /${HOME}/.bashrc.local ] && . /${HOME}/.bashrc.local
 
 # pyenv override
-if [ -d /${HOME}/.pyenv ]; then
+if [ -d ${HOME}/.pyenv ]; then
   export PYENV_ROOT="${HOME}/.pyenv"
   export PATH="$PYENV_ROOT/bin:$PATH"
   if command -v pyenv 1>/dev/null 2>&1; then
     eval "$(pyenv init -)"
   fi
 fi
+
+function p {
+while [ 1 ]; do
+  ssh -t pea.lan tmux attach -d
+  sleep 0.2
+  read -p '[Enter] to reconnect: '
+done
+}
+
 
 function zoom() {
   echo "running: firejail zoom"
