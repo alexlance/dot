@@ -6,6 +6,7 @@ shopt -s cmdhist      # save all lines of a multiple-line command in the same hi
 shopt -u execfail     # exec process should kill the shell when it exits
 shopt -s histappend   # append to history file, don't overwrite it
 
+export PAGER=more
 export MORE="-e"
 alias l='ls -lah --color=auto'
 alias lm='ls -lah --color=always | more -e'
@@ -33,6 +34,7 @@ alias fang='echo sshfs \
   -o compression=no \
   frog.lan:/mnt/nas/fang /fang'
 
+alias vnc='x11vnc -noxfixes -display :0'
 
 export PATH=$PATH:${HOME}/bin:${HOME}/go/bin/
 export PATH=/home/alla/python_venv/bin/:${PATH} # for python venv
@@ -48,7 +50,20 @@ export HISTSIZE=1000
 export HISTFILESIZE=2000
 export HISTTIMEFORMAT='%F %T '
 
+# alias fang='echo sshfs \
+#   -o allow_root \
+#   -o ServerAliveInterval=15,ServerAliveCountMax=3 \
+#   -o reconnect \
+#   -o kernel_cache \
+#   -o compression=no \
+#   frog.lan:/mnt/nas/fang /fang'
 
+  #-o Ciphers=arcfour \
+  #-o cache=yes \
+  #-o cache_timeout=600 \
+  #-o attr_timeout=600 \
+  #-o entry_timeout=600 \
+  #-o negative_timeout=600 \
 
 function mountcrypt() {
   echo "do something like this: "
@@ -117,8 +132,8 @@ function vimg() {
 function play() {
   if [ -d "${@}" ] || [ -f "${@}" ]; then
     echo "$(date '+%F %T') ${@}" >> ~/.smplayer_history
-    /usr/bin/smplayer "${@}"
-  else
+    vlc "${@}" || smplayer "${@}"
+   else
     (
     cd /home/alla/Download
     tput sgr0
@@ -182,15 +197,13 @@ function play() {
       file="$(find . -type f -name "${file}")"
       if [ -f "${file}" ]; then
         echo "$(date '+%F %T') ${file}" >> ~/.smplayer_history
-        /usr/bin/smplayer "$file"
-        break
+        vlc "${file}" || smplayer "$file"
       else
         echo "choose again"
       fi
     else
       echo "error"
     fi
-
     )
   fi
 }

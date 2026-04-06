@@ -8,6 +8,7 @@ filetype plugin on
 hi clear
 syntax reset
 syntax on
+set backupcopy=yes " this ensures the extended filesystem attributes are retained
 set path+=** " TALK
 set mouse=
 set encoding=utf-8
@@ -15,7 +16,7 @@ set hlsearch
 set expandtab
 set softtabstop=2
 set tabstop=2
-set foldmethod=marker
+"set foldmethod=marker
 set ruler
 set bs=2
 set sw=2
@@ -46,7 +47,7 @@ set iskeyword+=-      " make cw consider the dash character as a normal word cha
 set shortmess+=A      " get rid of 'a swap file already exists' messages
 set ff=unix
 set ttyfast
-set foldmethod=indent
+"set foldmethod=indent
 set foldnestmax=1
 "set showtabline=2
 "set tabpagemax=500
@@ -62,17 +63,43 @@ set virtualedit=block
 let mapleader=","
 
 " quit/exit shortcuts fat fingers
-cmap Q<CR> q<CR>
+cmap Q<CR> qa<CR>
 cmap Q!<CR> q!<CR>
 cmap Q1<CR> q!<CR>
 "cmap q1<CR> q!<CR>
 cmap Wq<CR> wq<CR>
 map Y y$
-map Q :q<CR>
+map Q :qa<CR>
 map W :w<CR>
 cmap q<CR> qa<CR>
 " open all folds
 noremap O maggvGzO`a
+
+" Redefine `n` in Normal mode to go to the next search match and then move left and right to catch the eye
+
+
+" Define the function to go to the next search match and then move right
+" function! GoToNextSearchMatchAndRight()
+"   " Move to the next search match
+"   set hlsearch
+"   execute "normal! n"
+"   let l:old_search = @/
+"
+"   " Move search elsewhere temporarily
+"   "redraw
+"   "sleep 140m
+"   let @/ = '\V\%#'
+"
+"   redraw
+"   sleep 140m
+"
+"   let @/ = l:old_search
+"
+"   redraw " important, let's final search match stay lit up
+"
+" endfunction
+" " Map `n` to call the function
+" nmap <silent> n :call GoToNextSearchMatchAndRight()<CR>
 
 map <C-d> :q!<CR>
 imap <C-d> <Esc>:q!<CR>
@@ -95,7 +122,7 @@ nnoremap K <nop>
 nnoremap ; :
 map <C-P> gqip
 map <C-J> <Esc>:%!python -m json.tool<CR>
-nnoremap J gJ
+"nnoremap J gJ
 
 
 " omni autocompletions per-language
@@ -163,9 +190,9 @@ map <C-g> <Esc>:Gstatus<CR>
 nnoremap Y y$
 
 " permanent undo history of files
-let s:undoDir = "~/.vim/undo"
-let &undodir=s:undoDir
 set undofile
+set undodir=~/.vim/undo
+set undolevels=10000
 
 " Highlight trailing whitespace etc
 highlight ExtraWhitespace ctermbg=8
@@ -231,8 +258,33 @@ map <S-Down> <C-e>
 inoremap <S-Up> <C-x><C-y>
 inoremap <S-Down> <C-x><C-e>
 
-map <C-n> :cn<CR>
-map <C-p> :cp<CR>
+"map <C-n> :cn<CR>
+"map <C-p> :cp<CR>
+"nnoremap <C-n> :cnext!<CR>
+"nnoremap <C-p> :cprev!<CR>
+"
+
+function! NextQF()
+    " If quickfix list is empty, do nothing
+    if empty(getqflist())
+        return
+    endif
+
+    " Get current quickfix index and total
+    let idx = getqflist({'idx':0}).idx
+    let total = len(getqflist())
+
+    " If at last item, jump to current (:cc)
+    if idx >= total
+        cc
+    else
+        cnext
+    endif
+endfunction
+
+nnoremap <C-n> :call NextQF()<CR>
+nnoremap <C-p> :cprev<CR>
+
 
 if &diff
     colorscheme apprentice
@@ -242,7 +294,7 @@ endif
 " mz = make a mark, gg=G = format whole file, `z = move to first mark
 "filetype plugin indent on
 "autocmd BufWritePre *.sh normal mzgg=G`z
-set foldmethod=syntax
+"set foldmethod=syntax
 
 
 
@@ -260,4 +312,8 @@ set formatlistpat+=\\s\\+                   " One or more spaces
 set formatlistpat+=\\\|                     " or
 set formatlistpat+=^\\s*[-–+o*•]\\s\\+      " Bullet points
 
+
+
+" format a python dict with spacing and indentation and newlines
+" %!python3 -c 'import sys, ast, json; print(json.dumps(ast.literal_eval(sys.stdin.read()), indent=4))'<CR>
 

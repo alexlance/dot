@@ -20,7 +20,8 @@ definekey top M-Tab focusprev
 definekey top M-F2 exec
 
 definekey top Print exec /home/alla/bin/screenshot.sh
-definekey top XF86HomePage exec /home/alla/bin/heater.sh
+definekey top XF86HomePage exec /home/alla/bin/button.sh
+definekey top Menu exec /home/alla/bin/button.sh back
 definekey top Alt_R exec xdotool click 2
 definekey top XF86MonBrightnessDown exec /home/alla/bin/brightness.sh down
 definekey top XF86MonBrightnessUp exec /home/alla/bin/brightness.sh up
@@ -28,7 +29,7 @@ definekey top XF86AudioLowerVolume exec /home/alla/bin/volume.sh down
 definekey top XF86AudioRaiseVolume exec /home/alla/bin/volume.sh up
 definekey top Pause exec /home/alla/bin/mute.sh
 definekey top XF86AudioMute exec /home/alla/bin/mute.sh
-definekey top XF86Tools exec /home/alla/bin/mute.sh
+definekey top XF86Tools exec /home/alla/bin/projector-and-amp.sh
 definekey top XF86AudioMedia exec /home/alla/bin/mute.sh
 
 definekey top C-M-BackSpace quit
@@ -44,3 +45,8 @@ exec rpws init 3 -a
 exec xsetroot -cursor_name left_ptr # get rid of cross default cursor
 exec xsetroot -bg black             # black bg
 exec hsetroot -solid "#000000"      # black bg (if using compton)
+
+bind p exec xdotool type "$(xclip -o -selection secondary)"
+# bind P exec xdotool type "$(xclip -o -selection secondary)"
+
+
