@@ -20,3 +20,5 @@ Xcursor.theme: big-cursor
 ! xterm*CursorColor: rgb:0/200/0
 xterm*cursorColor: *XtDefaultForeground
 *customization: -color
+xterm*visualBell: false
+xterm*audibleBell: false

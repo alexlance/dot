@@ -10,7 +10,7 @@ set bargravity n
 set inputwidth 500
 
 definekey top M-x exec xtrlock -b
-definekey top M-c exec xterm -class UXTerm -title uxterm -u8
+definekey top M-c exec xterm -class UXTerm -title uxterm -u8 -e "bash -l"
 definekey top M-b exec bash -c "firefox $(xclip -selection clipboard -o)"
 definekey top M-1 prev
 definekey top M-2 next

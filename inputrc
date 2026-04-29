@@ -11,3 +11,6 @@ set completion-ignore-case off
 "\e[1;3D": backward-word
 "\e[1;3C": forward-word
 "\e[1;3B": "cd -\n"
+
+set bell-style none
+set prefer-visible-bell on
